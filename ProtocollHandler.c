@@ -12,6 +12,7 @@
 #include "Sensors.h"
 #include "RGB.h"
 #include "Task.h"
+#include "Uart.h"
 
 bool Handle(Protocoll *cmd) {
     if (cmd->header_.preamble_ != kFixedPreamble) {
@@ -31,7 +32,7 @@ bool HandleGetValues(Variable *var) {
     bool known = false;
     switch (var->address_) {
         case kAddressPresenceSensor:
-            var->value_.Integer = (uint64_t) IsPresenceSensorActive();
+            var->value_.Byte_4 = (uint8_t) IsPresenceSensorActive();
             known = true;
             break;
         default:
@@ -65,7 +66,8 @@ bool HandleSetValues(const Variable *var) {
             known = true;
             break;
         case kAddressReset:
-            __asm__ volatile ("reset"); 
+            __asm__ volatile ("reset");
+            known = true;
             break;
         default:
             known = false;

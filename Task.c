@@ -43,7 +43,11 @@ void __attribute__((__interrupt__, auto_psv )) _ISR _RTCCInterrupt(void) {
 
 void UnlockDoor(const Payload *value) {
     SetLockOn(true);
-    __delay_ms(value->Integer);
+
+    uint8_t buffer[4] = { value->Byte_4, value->Byte_3, value->Byte_2,
+                          value->Byte_1 };
+    uint32_t time = *(uint32_t *)&buffer;
+    __delay_ms(time);
     SetLockOn(false);
 }
 
@@ -63,13 +67,13 @@ bool SingleActuator(const Payload *value) {
     if (!ReturnElevatorToTop()) {
         return false;
     }
-    if (!DownToLine(value->Byte_1, kLimitTopLIne)) {
+    if (!DownToLine(value->Byte_4, kLimitTopLIne)) {
         return false;
     }
-    if (!ActuateAt(true, value->Byte_1, value->Byte_2, 0xFF)) {
+    if (!ActuateAt(true, value->Byte_4, value->Byte_3, 0xFF)) {
         return false;
     }
-    if (!DownToLine(kLimitBottomLine, value->Byte_1)) {
+    if (!DownToLine(kLimitBottomLine, value->Byte_4)) {
         return false;
     }
     if (!OpenDispenser()) {
@@ -85,15 +89,15 @@ bool DoubleActuator(const Payload *value) {
     if (!ReturnElevatorToTop()) {
         return false;
     }
-    if (!DownToLine(value->Byte_1, kLimitTopLIne)) {
+    if (!DownToLine(value->Byte_4, kLimitTopLIne)) {
         return false;
     }
     __delay_ms(100);
-    if (!ActuateAt(false, value->Byte_1, value->Byte_2, value->Byte_3)) {
+    if (!ActuateAt(false, value->Byte_4, value->Byte_3, value->Byte_2)) {
         return false;
     }
     __delay_ms(200);
-    if (!DownToLine(kLimitBottomLine, value->Byte_1)) {
+    if (!DownToLine(kLimitBottomLine, value->Byte_4)) {
         return false;
     }
     __delay_ms(200);

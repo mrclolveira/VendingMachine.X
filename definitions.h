@@ -13,15 +13,12 @@ typedef union {
     uint16_t integer;
 } Integer;
 
-typedef union {
-    struct {
-        uint8_t Byte_1;
-        uint8_t Byte_2;
-        uint8_t Byte_3;
-        uint8_t Byte_4;
-    };
-    uint64_t Integer;
-} Payload;
+typedef struct {
+    uint8_t Byte_1;
+    uint8_t Byte_2;
+    uint8_t Byte_3;
+    uint8_t Byte_4;
+}Payload;
 
 typedef struct {
     unsigned char preamble_;
@@ -34,8 +31,8 @@ typedef struct {
 } Variable;
 
 #define protocoll_size_ 9
-typedef struct {
-    union {
+typedef union {
+    struct {
         Header header_;
         Variable variable_;
         Integer crc_;
