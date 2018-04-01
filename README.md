@@ -8,21 +8,23 @@ Draw flow chart
 | byte 01 | byte 02 | byte 03 | byte 04 | byte 05 | byte 06 | byte 07 | byte 08 | byte 09 |
 | Inicial | Propri. | Endereço| Valor  	                              | CRC               |
 
-  Byte Inicial = 0x83 
-    Determina que esse é o começo da menssagem é conhecida.
-  Byte Propriedade:
-    Propriedade SET = 0x00
-      Usada para atribuir um valor a tal funcionalidade
-    Propriedade GET = 01
-      Usada para receber um valor
-    Propriedade ACK = 0x02
-      Usada pelo equipamento como resposta afirmativa ao comando executado
-    Propriedade Falha = 0xFF
-      Usada pelo equipamento como resposta negativa a uma menssagem com falha
-		    Byte Inicial Errado
-        CRC Errado
-    Propriedade Desconhecida = 0xFD
-      Usada pelo equipamento como resposta negativa a uma menssagem correta porem com Endereço ou Valor Errado
+	Byte Inicial = 0x83 
+		Determina que esse é o começo da menssagem é conhecida.
+
+	Byte Propriedade
+	
+		Propriedade SET = 0x00
+			Usada para atribuir um valor a tal funcionalidade
+		Propriedade GET = 01
+			Usada para receber um valor
+		Propriedade ACK = 0x02
+			Usada pelo equipamento como resposta afirmativa ao comando executado
+		Propriedade Falha = 0xFF
+			Usada pelo equipamento como resposta negativa a uma menssagem com falha
+			Byte Inicial Errado
+			CRC Errado
+		Propriedade Desconhecida = 0xFD
+			Usada pelo equipamento como resposta negativa a uma menssagem correta porem com Endereço ou Valor Errado
 
 O valor deve ser usado 4 bytes ou um unsigned int de 64bits (little-endian)
 Endereço e valores:
