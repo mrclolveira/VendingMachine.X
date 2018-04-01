@@ -5,8 +5,8 @@ Vending Machine 5 lines and 8 collumns
 Draw flow chart
 
 ------ FRAME ------
-| byte 01 | byte 02 | byte 03 | byte 04 | byte 05 | byte 06 | byte 07 | byte 08 | byte 09 |
-| Inicial | Propri. | Endereço| Valor  	                              | CRC               |
+	| byte 01 | byte 02 | byte 03 | byte 04 | byte 05 | byte 06 | byte 07 | byte 08 | byte 09 |
+	| Inicial | Propri. | Endereço| Valor  	                              | CRC               |
 
 	Byte Inicial = 0x83 
 		Determina que esse é o começo da menssagem é conhecida.
