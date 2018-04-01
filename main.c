@@ -60,15 +60,15 @@
 bool close_dispenser_ = false;
 
 void Setup() {
+    // Wait for hardware get stable
+    __delay_ms(2000);
+
     UartInit();
     SensorsInit();
     ActuatorsInit();
     LEDInit();
     RGBInit();
-    InitLedThread();
-
-    // Wait for hardware get stable
-    __delay_ms(2000);
+//    InitLedThread();
 
     UartWriteASCII("Ligado");
     ReturnElevatorToTop();
@@ -81,6 +81,9 @@ int main(void) {
         if (close_dispenser_) {
             CloseDispenser();
         }
+
+        SetLedOn(!LATFbits.LATF5);
+        __delay_ms(500);
     }
     return 0;
 }

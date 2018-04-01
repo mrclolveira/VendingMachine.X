@@ -58,6 +58,7 @@ typedef struct {
 #define kAddressAlignActuators 0x22
 #define kAddressSingleActuator 0x23
 #define kAddressDoubleActuator 0x24
+#define kAddressReset 0x25
 
 #endif	// DEFINITIONS_H
 

@@ -5,6 +5,9 @@
  * Created on 11 de Março de 2018, 16:58
  */
 
+#include <xc.h>
+#include <libpic30.h>
+
 #include "ProtocollHandler.h"
 #include "Sensors.h"
 #include "RGB.h"
@@ -60,6 +63,9 @@ bool HandleSetValues(const Variable *var) {
         case kAddressDoubleActuator:
             DoubleActuator(&var->value_);
             known = true;
+            break;
+        case kAddressReset:
+            __asm__ volatile ("reset"); 
             break;
         default:
             known = false;
