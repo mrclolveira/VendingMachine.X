@@ -105,15 +105,20 @@ bool IsSensorLineActive(const uint8_t line) {
     bool result = false;
     switch (line) {
         case 0:
-            result = SensorInLine0;
+            result = !SensorInLine0;
+            break;
         case 1:
-            result = SensorInLine1;
+            result = !SensorInLine1;
+            break;
         case 2:
-            result = SensorInLine2;
+            result = !SensorInLine2;
+            break;
         case 3:
-            result = SensorInLine3;
+            result = !SensorInLine3;
+            break;
         case 4:
-            result = SensorInLine4;
+            result = !SensorInLine4;
+            break;
         default:
             result = false;
             break;

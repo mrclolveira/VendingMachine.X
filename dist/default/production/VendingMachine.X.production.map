@@ -93,11 +93,11 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x688           0x9cc  (2508)
 .const                       0x888                 0x8             0xc  (12)
-.text                        0x890               0xd38          0x13d4  (5076)
-.init.delay32               0x15c8                0x1c            0x2a  (42)
-.dinit                      0x15e4                 0x8             0xc  (12)
+.text                        0x890               0xdc6          0x14a9  (5289)
+.init.delay32               0x1656                0x1c            0x2a  (42)
+.dinit                      0x1672                 0x8             0xc  (12)
 
-                 Total program memory used (bytes):         0x1de2  (7650) 2%
+                 Total program memory used (bytes):         0x1eb7  (7863) 3%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -139,8 +139,8 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00023c                  __psv_init
-                  0x000252                  __data_init
                   0x000252                  __data_init_da
+                  0x000252                  __data_init
                   0x000304                  __RTCCInterrupt
                   0x00035a                  __U1RXInterrupt
                   0x000442                  __DefaultInterrupt
@@ -165,89 +165,91 @@ External Symbols in Program Memory (by address):
                   0x0008da                  _UnlockDoor
                   0x000920                  _AlignActuators
                   0x000964                  _SingleActuator
-                  0x0009d4                  _DoubleActuator
-                  0x000a5e                  _ReturnElevatorToTop
-                  0x000a9e                  _DownToLine
-                  0x000b1a                  _ActuateAt
-                  0x000c5c                  _OpenDispenser
-                  0x000c98                  _CloseDispenser
-                  0x000cd2                  _ActuatorsInit
-                  0x000d04                  _SetLineMotorOn
-                  0x000d98                  _SetColumnMotorOn
-                  0x000e7e                  _SetLockOn
-                  0x000e94                  _SetDispenserOn
-                  0x000eac                  _SetElevatorOn
-                  0x000ee2                  _SensorsInit
-                  0x000f16                  _SetOnSensor
-                  0x000ffa                  _IsSensorLineActive
-                  0x001086                  _IsDispenserOpen
-                  0x00109a                  _IsPresenceSensorActive
-                  0x0010b2                  _IsElevatorSensorActive
-                  0x0010e8                  _UartInit
-                  0x00114a                  _UartWrite
-                  0x001184                  _UartWriteByte
-                  0x0011ba                  _UartWriteASCII
-                  0x0011e8                  _SendAck
-                  0x001214                  _SendNack
-                  0x00123a                  _SendUnknownAddress
-                  0x001260                  _RGBInit
-                  0x00132e                  _SetRGB
-                  0x001394                  _Handle
-                  0x0013c8                  _HandleGetValues
-                  0x0013f4                  _HandleSetValues
-                  0x001484                  _SendPresenceStatus
-                  0x0014ac                  _CRC_HW_calculate
-                  0x001566                  _Setup
-                  0x001580                  _main
-                  0x0015a8                  _LEDInit
-                  0x0015b0                  _SetLedOn
-                  0x0015c8                  ___delay32
+                  0x0009e6                  _DoubleActuator
+                  0x000a6c                  _ReturnElevatorToTop
+                  0x000aae                  _DownToLine
+                  0x000b62                  _ActuateAt
+                  0x000c8e                  _OpenDispenser
+                  0x000cce                  _CloseDispenser
+                  0x000d24                  _ActuatorsInit
+                  0x000d56                  _SetLineMotorOn
+                  0x000dea                  _SetColumnMotorOn
+                  0x000ed0                  _SetLockOn
+                  0x000ee6                  _SetDispenserOn
+                  0x000efe                  _SetElevatorOn
+                  0x000f34                  _SensorsInit
+                  0x000f68                  _SetOnSensor
+                  0x00104c                  _IsSensorLineActive
+                  0x0010d6                  _IsDispenserOpen
+                  0x0010ea                  _IsPresenceSensorActive
+                  0x001102                  _IsElevatorSensorActive
+                  0x001138                  _UartInit
+                  0x00119a                  _UartWrite
+                  0x0011d4                  _UartWriteByte
+                  0x00120a                  _UartWriteASCII
+                  0x001238                  _SendAck
+                  0x001264                  _SendNack
+                  0x00128a                  _SendUnknownAddress
+                  0x0012b0                  _Handle
+                  0x0012e4                  _HandleGetValues
+                  0x001324                  _HandleSetValues
+                  0x0013b4                  _SendPresenceStatus
+                  0x0013dc                  _SendDispenserClosed
+                  0x001404                  _RGBInit
+                  0x0014d2                  _SetRGB
+                  0x001538                  _CRC_HW_calculate
+                  0x0015f2                  _Setup
+                  0x00160c                  _main
+                  0x001636                  _LEDInit
+                  0x00163e                  _SetLedOn
+                  0x001656                  ___delay32
 
 External Symbols in Program Memory (by name):
 
-                  0x000b1a                  _ActuateAt
-                  0x000cd2                  _ActuatorsInit
+                  0x000b62                  _ActuateAt
+                  0x000d24                  _ActuatorsInit
                   0x000920                  _AlignActuators
-                  0x0014ac                  _CRC_HW_calculate
-                  0x000c98                  _CloseDispenser
-                  0x0009d4                  _DoubleActuator
-                  0x000a9e                  _DownToLine
-                  0x001394                  _Handle
-                  0x0013c8                  _HandleGetValues
-                  0x0013f4                  _HandleSetValues
+                  0x001538                  _CRC_HW_calculate
+                  0x000cce                  _CloseDispenser
+                  0x0009e6                  _DoubleActuator
+                  0x000aae                  _DownToLine
+                  0x0012b0                  _Handle
+                  0x0012e4                  _HandleGetValues
+                  0x001324                  _HandleSetValues
                   0x000890                  _InitLedThread
-                  0x001086                  _IsDispenserOpen
-                  0x0010b2                  _IsElevatorSensorActive
-                  0x00109a                  _IsPresenceSensorActive
-                  0x000ffa                  _IsSensorLineActive
-                  0x0015a8                  _LEDInit
-                  0x000c5c                  _OpenDispenser
-                  0x001260                  _RGBInit
-                  0x000a5e                  _ReturnElevatorToTop
-                  0x0011e8                  _SendAck
-                  0x001214                  _SendNack
-                  0x001484                  _SendPresenceStatus
-                  0x00123a                  _SendUnknownAddress
-                  0x000ee2                  _SensorsInit
-                  0x000d98                  _SetColumnMotorOn
-                  0x000e94                  _SetDispenserOn
-                  0x000eac                  _SetElevatorOn
-                  0x0015b0                  _SetLedOn
-                  0x000d04                  _SetLineMotorOn
-                  0x000e7e                  _SetLockOn
-                  0x000f16                  _SetOnSensor
-                  0x00132e                  _SetRGB
-                  0x001566                  _Setup
+                  0x0010d6                  _IsDispenserOpen
+                  0x001102                  _IsElevatorSensorActive
+                  0x0010ea                  _IsPresenceSensorActive
+                  0x00104c                  _IsSensorLineActive
+                  0x001636                  _LEDInit
+                  0x000c8e                  _OpenDispenser
+                  0x001404                  _RGBInit
+                  0x000a6c                  _ReturnElevatorToTop
+                  0x001238                  _SendAck
+                  0x0013dc                  _SendDispenserClosed
+                  0x001264                  _SendNack
+                  0x0013b4                  _SendPresenceStatus
+                  0x00128a                  _SendUnknownAddress
+                  0x000f34                  _SensorsInit
+                  0x000dea                  _SetColumnMotorOn
+                  0x000ee6                  _SetDispenserOn
+                  0x000efe                  _SetElevatorOn
+                  0x00163e                  _SetLedOn
+                  0x000d56                  _SetLineMotorOn
+                  0x000ed0                  _SetLockOn
+                  0x000f68                  _SetOnSensor
+                  0x0014d2                  _SetRGB
+                  0x0015f2                  _Setup
                   0x000964                  _SingleActuator
-                  0x0010e8                  _UartInit
-                  0x00114a                  _UartWrite
-                  0x0011ba                  _UartWriteASCII
-                  0x001184                  _UartWriteByte
+                  0x001138                  _UartInit
+                  0x00119a                  _UartWrite
+                  0x00120a                  _UartWriteASCII
+                  0x0011d4                  _UartWriteByte
                   0x0008da                  _UnlockDoor
                   0x000442                  __DefaultInterrupt
                   0x000304                  __RTCCInterrupt
                   0x00035a                  __U1RXInterrupt
-                  0x0015c8                  ___delay32
+                  0x001656                  ___delay32
                   0x00065c                  ___divdi3
                   0x000448                  ___fixunssfsi
                   0x00076a                  ___floatundisf
@@ -269,7 +271,7 @@ External Symbols in Program Memory (by name):
                   0x000814                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x001580                  _main
+                  0x00160c                  _main
 
 Memory Configuration
 
@@ -413,20 +415,20 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x6ca5
+.debug_info       0x000000       0x6d1e
  *(.debug_info)
  .debug_info      0x000000       0x10b7 build/default/production/Actuators.o
  .debug_info      0x0010b7        0x39c build/default/production/LED.o
  .debug_info      0x001453       0x1561 build/default/production/RGB.o
  .debug_info      0x0029b4       0x1b33 build/default/production/Sensors.o
- .debug_info      0x0044e7        0xdd7 build/default/production/Task.o
- .debug_info      0x0052be       0x11a0 build/default/production/Uart.o
- .debug_info      0x00645e        0x3fc build/default/production/ProtocollHandler.o
- .debug_info      0x00685a        0x2b0 build/default/production/main.o
- .debug_info      0x006b0a        0x19b build/default/production/CRC.o
+ .debug_info      0x0044e7        0xe0a build/default/production/Task.o
+ .debug_info      0x0052f1       0x11a0 build/default/production/Uart.o
+ .debug_info      0x006491        0x442 build/default/production/ProtocollHandler.o
+ .debug_info      0x0068d3        0x2b0 build/default/production/main.o
+ .debug_info      0x006b83        0x19b build/default/production/CRC.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x8e5
+.debug_abbrev     0x000000        0x8fa
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0xf9 build/default/production/Actuators.o
  .debug_abbrev    0x0000f9         0xb0 build/default/production/LED.o
@@ -434,23 +436,23 @@ __CONFIG1
  .debug_abbrev    0x0002bf        0x138 build/default/production/Sensors.o
  .debug_abbrev    0x0003f7        0x18f build/default/production/Task.o
  .debug_abbrev    0x000586        0x152 build/default/production/Uart.o
- .debug_abbrev    0x0006d8         0xd5 build/default/production/ProtocollHandler.o
- .debug_abbrev    0x0007ad         0xd2 build/default/production/main.o
- .debug_abbrev    0x00087f         0x66 build/default/production/CRC.o
+ .debug_abbrev    0x0006d8         0xea build/default/production/ProtocollHandler.o
+ .debug_abbrev    0x0007c2         0xd2 build/default/production/main.o
+ .debug_abbrev    0x000894         0x66 build/default/production/CRC.o
 
-.debug_line       0x000000        0xa28
+.debug_line       0x000000        0xa45
  *(.debug_line)
  .debug_line      0x000000        0x15c build/default/production/Actuators.o
  .debug_line      0x00015c         0xea build/default/production/LED.o
  .debug_line      0x000246        0x11b build/default/production/RGB.o
- .debug_line      0x000361        0x154 build/default/production/Sensors.o
- .debug_line      0x0004b5        0x1ee build/default/production/Task.o
- .debug_line      0x0006a3        0x163 build/default/production/Uart.o
- .debug_line      0x000806         0xdc build/default/production/ProtocollHandler.o
- .debug_line      0x0008e2        0x102 build/default/production/main.o
- .debug_line      0x0009e4         0x44 build/default/production/CRC.o
+ .debug_line      0x000361        0x155 build/default/production/Sensors.o
+ .debug_line      0x0004b6        0x1fd build/default/production/Task.o
+ .debug_line      0x0006b3        0x163 build/default/production/Uart.o
+ .debug_line      0x000816         0xe8 build/default/production/ProtocollHandler.o
+ .debug_line      0x0008fe        0x103 build/default/production/main.o
+ .debug_line      0x000a01         0x44 build/default/production/CRC.o
 
-.debug_frame      0x000000        0x5a6
+.debug_frame      0x000000        0x5c2
  *(.debug_frame)
  .debug_frame     0x000000         0xbc build/default/production/Actuators.o
  .debug_frame     0x0000bc         0x4c build/default/production/LED.o
@@ -458,9 +460,9 @@ __CONFIG1
  .debug_frame     0x000154         0xbc build/default/production/Sensors.o
  .debug_frame     0x000210        0x170 build/default/production/Task.o
  .debug_frame     0x000380        0x126 build/default/production/Uart.o
- .debug_frame     0x0004a6         0x84 build/default/production/ProtocollHandler.o
- .debug_frame     0x00052a         0x4c build/default/production/main.o
- .debug_frame     0x000576         0x30 build/default/production/CRC.o
+ .debug_frame     0x0004a6         0xa0 build/default/production/ProtocollHandler.o
+ .debug_frame     0x000546         0x4c build/default/production/main.o
+ .debug_frame     0x000592         0x30 build/default/production/CRC.o
 
 .debug_str        0x000000        0x352
  *(.debug_str)
@@ -479,7 +481,7 @@ __CONFIG1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x391
+                  0x000000        0x3a9
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x7f build/default/production/Actuators.o
@@ -494,11 +496,11 @@ __CONFIG1
  .debug_pubnames
                   0x00023f         0x95 build/default/production/Uart.o
  .debug_pubnames
-                  0x0002d4         0x5c build/default/production/ProtocollHandler.o
+                  0x0002d4         0x74 build/default/production/ProtocollHandler.o
  .debug_pubnames
-                  0x000330         0x3a build/default/production/main.o
+                  0x000348         0x3a build/default/production/main.o
  .debug_pubnames
-                  0x00036a         0x27 build/default/production/CRC.o
+                  0x000382         0x27 build/default/production/CRC.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1820,60 +1822,61 @@ __c30_signature
 .const              0x8888          0x8 load address 0x000888  
  .const             0x8888          0x8 build/default/production/Uart.o
 
-.text             0x000890        0xd38
- .text            0x000890        0x442 build/default/production/Task.o
+.text             0x000890        0xdc6
+ .text            0x000890        0x494 build/default/production/Task.o
                   0x000890                  _InitLedThread
                   0x0008da                  _UnlockDoor
                   0x000920                  _AlignActuators
                   0x000964                  _SingleActuator
-                  0x0009d4                  _DoubleActuator
-                  0x000a5e                  _ReturnElevatorToTop
-                  0x000a9e                  _DownToLine
-                  0x000b1a                  _ActuateAt
-                  0x000c5c                  _OpenDispenser
-                  0x000c98                  _CloseDispenser
- .text            0x000cd2        0x210 build/default/production/Actuators.o
-                  0x000cd2                  _ActuatorsInit
-                  0x000d04                  _SetLineMotorOn
-                  0x000d98                  _SetColumnMotorOn
-                  0x000e7e                  _SetLockOn
-                  0x000e94                  _SetDispenserOn
-                  0x000eac                  _SetElevatorOn
- .text            0x000ee2        0x206 build/default/production/Sensors.o
-                  0x000ee2                  _SensorsInit
-                  0x000f16                  _SetOnSensor
-                  0x000ffa                  _IsSensorLineActive
-                  0x001086                  _IsDispenserOpen
-                  0x00109a                  _IsPresenceSensorActive
-                  0x0010b2                  _IsElevatorSensorActive
- .text            0x0010e8        0x178 build/default/production/Uart.o
-                  0x0010e8                  _UartInit
-                  0x00114a                  _UartWrite
-                  0x001184                  _UartWriteByte
-                  0x0011ba                  _UartWriteASCII
-                  0x0011e8                  _SendAck
-                  0x001214                  _SendNack
-                  0x00123a                  _SendUnknownAddress
- .text            0x001260        0x134 build/default/production/RGB.o
-                  0x001260                  _RGBInit
-                  0x00132e                  _SetRGB
- .text            0x001394        0x118 build/default/production/ProtocollHandler.o
-                  0x001394                  _Handle
-                  0x0013c8                  _HandleGetValues
-                  0x0013f4                  _HandleSetValues
-                  0x001484                  _SendPresenceStatus
- .text            0x0014ac         0xba build/default/production/CRC.o
-                  0x0014ac                  _CRC_HW_calculate
- .text            0x001566         0x42 build/default/production/main.o
-                  0x001566                  _Setup
-                  0x001580                  _main
- .text            0x0015a8         0x20 build/default/production/LED.o
-                  0x0015a8                  _LEDInit
-                  0x0015b0                  _SetLedOn
+                  0x0009e6                  _DoubleActuator
+                  0x000a6c                  _ReturnElevatorToTop
+                  0x000aae                  _DownToLine
+                  0x000b62                  _ActuateAt
+                  0x000c8e                  _OpenDispenser
+                  0x000cce                  _CloseDispenser
+ .text            0x000d24        0x210 build/default/production/Actuators.o
+                  0x000d24                  _ActuatorsInit
+                  0x000d56                  _SetLineMotorOn
+                  0x000dea                  _SetColumnMotorOn
+                  0x000ed0                  _SetLockOn
+                  0x000ee6                  _SetDispenserOn
+                  0x000efe                  _SetElevatorOn
+ .text            0x000f34        0x204 build/default/production/Sensors.o
+                  0x000f34                  _SensorsInit
+                  0x000f68                  _SetOnSensor
+                  0x00104c                  _IsSensorLineActive
+                  0x0010d6                  _IsDispenserOpen
+                  0x0010ea                  _IsPresenceSensorActive
+                  0x001102                  _IsElevatorSensorActive
+ .text            0x001138        0x178 build/default/production/Uart.o
+                  0x001138                  _UartInit
+                  0x00119a                  _UartWrite
+                  0x0011d4                  _UartWriteByte
+                  0x00120a                  _UartWriteASCII
+                  0x001238                  _SendAck
+                  0x001264                  _SendNack
+                  0x00128a                  _SendUnknownAddress
+ .text            0x0012b0        0x154 build/default/production/ProtocollHandler.o
+                  0x0012b0                  _Handle
+                  0x0012e4                  _HandleGetValues
+                  0x001324                  _HandleSetValues
+                  0x0013b4                  _SendPresenceStatus
+                  0x0013dc                  _SendDispenserClosed
+ .text            0x001404        0x134 build/default/production/RGB.o
+                  0x001404                  _RGBInit
+                  0x0014d2                  _SetRGB
+ .text            0x001538         0xba build/default/production/CRC.o
+                  0x001538                  _CRC_HW_calculate
+ .text            0x0015f2         0x44 build/default/production/main.o
+                  0x0015f2                  _Setup
+                  0x00160c                  _main
+ .text            0x001636         0x20 build/default/production/LED.o
+                  0x001636                  _LEDInit
+                  0x00163e                  _SetLedOn
 
-.init.delay32     0x0015c8         0x1c
- .init.delay32    0x0015c8         0x1c c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(delay32da.Leo)
-                  0x0015c8                  ___delay32
+.init.delay32     0x001656         0x1c
+ .init.delay32    0x001656         0x1c c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(delay32da.Leo)
+                  0x001656                  ___delay32
 
-.dinit            0x0015e4          0x8
- .dinit           0x0015e4          0x8 data_init
+.dinit            0x001672          0x8
+ .dinit           0x001672          0x8 data_init

@@ -80,6 +80,7 @@ int main(void) {
     while(true) {
         if (close_dispenser_) {
             CloseDispenser();
+            SendDispenserClosed();
         }
 
         SetLedOn(!LATFbits.LATF5);

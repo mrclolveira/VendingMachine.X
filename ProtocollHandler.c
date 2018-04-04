@@ -36,6 +36,10 @@ bool HandleGetValues(Variable *var) {
             var->value_.Byte_4 = (uint8_t) IsPresenceSensorActive();
             known = true;
             break;
+        case kAddressDispenserSensor:
+            var->value_.Byte_4 = (uint8_t) IsDispenserOpen();
+            known = true;
+            break;
         default:
             known = false;
             break;
@@ -83,6 +87,19 @@ void SendPresenceStatus() {
     status.header_.property_ = kAckProperty;
     status.variable_.address_ = kAddressPresenceSensor;
     status.variable_.value_.Byte_4 = (uint8_t) IsPresenceSensorActive();
+
+    Integer crc;
+    crc.integer = CRC_HW_calculate(status.bytes, protocoll_size_ - 2);
+    status.crc_ = crc;
+    UartWrite(&status);
+}
+
+void SendDispenserClosed() {
+    Protocoll status;
+    status.header_.preamble_ = kFixedPreamble;
+    status.header_.property_ = kAckProperty;
+    status.variable_.address_ = kAddressDispenserSensor;
+    status.variable_.value_.Byte_4 = (uint8_t) IsDispenserOpen();
 
     Integer crc;
     crc.integer = CRC_HW_calculate(status.bytes, protocoll_size_ - 2);

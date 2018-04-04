@@ -70,12 +70,15 @@ bool SingleActuator(const Payload *value) {
     if (!DownToLine(value->Byte_4, kLimitTopLIne)) {
         return false;
     }
+    __delay_ms(100);
     if (!ActuateAt(true, value->Byte_4, value->Byte_3, 0xFF)) {
         return false;
     }
+    __delay_ms(200);
     if (!DownToLine(kLimitBottomLine, value->Byte_4)) {
         return false;
     }
+    __delay_ms(300);
     if (!OpenDispenser()) {
         return false;
     }
@@ -100,14 +103,13 @@ bool DoubleActuator(const Payload *value) {
     if (!DownToLine(kLimitBottomLine, value->Byte_4)) {
         return false;
     }
-    __delay_ms(200);
+    __delay_ms(300);
     if (!OpenDispenser()) {
         return false;
     }
     if (!ReturnElevatorToTop()) {
         return false;
     }
-    close_dispenser_ = true;;
     return true;
 }
 
@@ -116,7 +118,7 @@ bool ReturnElevatorToTop(void) {
     uint16_t time = 0;
     SetElevatorOn(kUp, true);
 
-    while (IsElevatorSensorActive(kEndLimit) && (++time<timeout)) {
+    while (!IsElevatorSensorActive(kEndLimit) && (++time<timeout)) {
         __delay_ms(1);
     }
 
@@ -130,15 +132,22 @@ bool DownToLine(const uint8_t line, uint8_t current_line) {
     }
 
     SetElevatorOn(kDown, true);
-    uint16_t timeout = 1000;
+    uint16_t timeout = 10000;
     uint16_t time = 0;
-    while (current_line > line) {
+    uint16_t timeout_internal = 1000;
+    uint16_t time_internal = 0;
+    while (current_line > line && (++time<timeout)) {
+        __delay_ms(1);
         if (IsElevatorSensorActive(kLevel)) {
             --current_line;
             if (current_line > line) {
-                while (IsElevatorSensorActive(kLevel) && (++time<timeout)) {
+                while (IsElevatorSensorActive(kLevel) && (++time_internal<timeout_internal)) {
                     __delay_ms(1);
                 }
+                time_internal = 0;
+            }
+            if (time_internal > timeout_internal) {
+                break;
             }
         }
         if (time > timeout) {
@@ -146,7 +155,7 @@ bool DownToLine(const uint8_t line, uint8_t current_line) {
         }
     }
     SetElevatorOn(kDown, false);
-    return (time < timeout);
+    return (time < timeout) || (time_internal > timeout_internal);
 }
 
 bool ActuateAt(bool single, const uint8_t line, const uint8_t row_one, const uint8_t row_two) {
@@ -164,11 +173,11 @@ bool ActuateAt(bool single, const uint8_t line, const uint8_t row_one, const uin
 
     bool started = false;
     while (!started) {
-        if (single) {
-            started = !IsSensorLineActive(row_one);
-        } else {
-            started = !IsSensorLineActive(row_one) && !IsSensorLineActive(row_two);
-        }
+        started = !IsSensorLineActive(line);
+    }
+
+    if (!single) {
+        SetOnSensor(0xFF, false);
     }
 
     bool ready = false;
@@ -182,11 +191,11 @@ bool ActuateAt(bool single, const uint8_t line, const uint8_t row_one, const uin
                 SetColumnMotorOn(row_one, false);
                 ready = true;
             }
-            __delay_ms(2);
+            __delay_ms(1);
         } else {
             SetOnSensor(row_one, true);
             __delay_ms(1);
-            if (IsSensorLineActive(row_one)) {
+            if (IsSensorLineActive(line)) {
                 SetColumnMotorOn(row_one, false);
                 ready_one = true;
             }
@@ -194,7 +203,7 @@ bool ActuateAt(bool single, const uint8_t line, const uint8_t row_one, const uin
 
             SetOnSensor(row_two, true);
             __delay_ms(1);
-            if (IsSensorLineActive(row_two)) {
+            if (IsSensorLineActive(line)) {
                 SetColumnMotorOn(row_two, false);
                 ready_two = true;
             }
@@ -221,6 +230,7 @@ bool OpenDispenser(void) {
         __delay_ms(1);
     }
     SetDispenserOn(false);
+    close_dispenser_ = true;
     return (time < timeout);
 }
 
@@ -230,6 +240,12 @@ bool CloseDispenser(void) {
     uint16_t time = 0;
     while (++time<timeout) {
         __delay_ms(1);
+    }
+    if (IsPresenceSensorActive()) {
+        timeout = 7000;
+        while (++time<timeout) {
+            __delay_ms(1);
+        }
     }
     SetDispenserOn(true);
     __delay_ms(100);

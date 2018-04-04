@@ -50,12 +50,13 @@ typedef union {
 #define kUnknownProperty 0xFD
 
 #define kAddressPresenceSensor 0x10
+#define kAddressDispenserSensor 0x11
 #define kAddressRGB 0x20
 #define kAddressDoorLock 0x21
 #define kAddressAlignActuators 0x22
 #define kAddressSingleActuator 0x23
 #define kAddressDoubleActuator 0x24
-#define kAddressReset 0x25
+#define kAddressReset 0x26
 
 #endif	// DEFINITIONS_H
 
