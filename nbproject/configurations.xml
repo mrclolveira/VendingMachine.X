@@ -36,6 +36,7 @@
         <itemPath>CRC.h</itemPath>
         <itemPath>ProtocollHandler.h</itemPath>
         <itemPath>ProtocollHandler.c</itemPath>
+        <itemPath>CRC.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>definitions.h</itemPath>

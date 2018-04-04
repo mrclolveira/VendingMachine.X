@@ -9,45 +9,47 @@
 
 void RGBInit(void) {
     TRISGbits.TRISG6 = 0;
-    ANSGbits.ANSG6 = 1;
+    ANSGbits.ANSG6 = 0;
     TRISGbits.TRISG7 = 0;
-    ANSGbits.ANSG7 = 1;
+    ANSGbits.ANSG7 = 0;
     TRISGbits.TRISG8 = 0;
-    ANSGbits.ANSG8 = 1;
+    ANSGbits.ANSG8 = 0;
 
-    //CONFIGURE I/O PINS
-    __builtin_write_OSCCONL(OSCCON & 0xbf);
-    RPOR10bits.RP21R = 1;
-    RPOR13bits.RP26R = 2;
-    RPOR9bits.RP19R = 36;
-    __builtin_write_OSCCONL(OSCCON | 0x40);
-
+    OC1CON1 = 0x0000;
+    OC1CON2 = 0x0000;
     OC1CON1bits.OCTSEL = 0b111;
     OC1CON1bits.TRIGMODE = 1;
     OC1CON1bits.OCM = 0b110;
-    OC1CON2bits.OCTRIG = 0;
     OC1CON2bits.SYNCSEL = 0x1F;
     OC1R = 0x0FFF;
     OC1RS = 0x0;
     PR1 = 0x0FFF;
 
+    OC2CON1 = 0x0000;
+    OC2CON2 = 0x0000;
     OC2CON1bits.OCTSEL = 0b111;
     OC2CON1bits.TRIGMODE = 1;
     OC2CON1bits.OCM = 0b110;
-    OC2CON2bits.OCTRIG = 0;
     OC2CON2bits.SYNCSEL = 0x1F;
     OC2R = 0x0FFF;
-    OC2RS = 0x0;;
-    PR1 = 0x0FFF;
+    OC2RS = 0x0;
+    PR2 = 0x0FFF;
 
+    OC3CON1 = 0x0000;
+    OC3CON2 = 0x0000;
     OC3CON1bits.OCTSEL = 0b111;
     OC3CON1bits.TRIGMODE = 1;
     OC3CON1bits.OCM = 0b110;
-    OC3CON2bits.OCTRIG = 0;
     OC3CON2bits.SYNCSEL = 0x1F;
     OC3R = 0x0FFF;
     OC3RS = 0x0;
-    PR1 = 0x0FFF;
+    PR3 = 0x0FFF;
+
+    __builtin_write_OSCCONL(OSCCON & 0xbf);
+    RPOR10bits.RP21R = 1;
+    RPOR13bits.RP26R = 2;
+    RPOR9bits.RP19R = 36;
+    __builtin_write_OSCCONL(OSCCON | 0x40);
 }
 
 void SetRGB(const uint8_t red, const uint8_t green, const uint8_t blue) {
@@ -57,11 +59,9 @@ void SetRGB(const uint8_t red, const uint8_t green, const uint8_t blue) {
     uint16_t b = (double)blue * kProportion;
 
     OC1R = r;
-    OC1RS = 4095 - r;
-
+    OC1RS = 0x0FFF - r;
     OC2R = g;
-    OC2RS = 4095 - g;
-
+    OC2RS = 0x0FFF - g;
     OC3R = b;
-    OC3RS = 4095 - b;
+    OC3RS = 0x0FFF - b;
 }

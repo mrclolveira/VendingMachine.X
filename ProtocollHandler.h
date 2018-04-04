@@ -9,5 +9,6 @@
 bool Handle(Protocoll *cmd);
 bool HandleGetValues(Variable *var);
 bool HandleSetValues(const Variable *var);
+void SendPresenceStatus();
 
 #endif	// PROTOCOLLHANDLER_H

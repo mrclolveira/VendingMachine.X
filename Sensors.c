@@ -8,11 +8,11 @@
 
 #include "Sensors.h"
 
-#define SensorInLine0 PORTEbits.RE4   //saida sensor linha 1
-#define SensorInLine1 PORTGbits.RG15   //saida sensor linha 2
-#define SensorInLine2 PORTEbits.RE5  //saida sensor linha 3
-#define SensorInLine3 PORTEbits.RE6   //saida sensor linha 4
-#define SensorInLine4 PORTCbits.RC1   //saida sensor linha 5
+#define SensorInLine0 PORTEbits.RE4
+#define SensorInLine1 PORTGbits.RG15
+#define SensorInLine2 PORTEbits.RE5
+#define SensorInLine3 PORTEbits.RE6
+#define SensorInLine4 PORTCbits.RC1
 
 #define SensorOutColumn0(x) LATAbits.LATA7 = x
 #define SensorOutColumn1(x) LATEbits.LATE0 = x
@@ -27,7 +27,6 @@
 #define SensorElevatorEndLimit PORTAbits.RA2
 
 #define SensorDispenser PORTBbits.RB3
-//#define SensorDispenser PORTGbits.RG3
 
 #define SensorPresence PORTFbits.RF3
 

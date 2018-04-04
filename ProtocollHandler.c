@@ -13,6 +13,7 @@
 #include "RGB.h"
 #include "Task.h"
 #include "Uart.h"
+#include "CRC.h"
 
 bool Handle(Protocoll *cmd) {
     if (cmd->header_.preamble_ != kFixedPreamble) {
@@ -76,3 +77,15 @@ bool HandleSetValues(const Variable *var) {
     return known;
 }
 
+void SendPresenceStatus() {
+    Protocoll status;
+    status.header_.preamble_ = kFixedPreamble;
+    status.header_.property_ = kAckProperty;
+    status.variable_.address_ = kAddressPresenceSensor;
+    status.variable_.value_.Byte_4 = (uint8_t) IsPresenceSensorActive();
+
+    Integer crc;
+    crc.integer = CRC_HW_calculate(status.bytes, protocoll_size_ - 2);
+    status.crc_ = crc;
+    UartWrite(&status);
+}
