@@ -61,11 +61,12 @@
 bool close_dispenser_ = false;
 
 void Setup() {
-    CLKDIV =  0;
     // Wait for hardware get stable
     __delay_ms(2000);
 
     UartInit();
+    UartWriteInt(RCON);
+    RCON = 0;
     SensorsInit();
     ActuatorsInit();
     LEDInit();

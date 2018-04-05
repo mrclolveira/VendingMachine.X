@@ -5,5 +5,4 @@ definitions.h  \
 Sensors.h  \
 RGB.h  \
 Task.h  \
-Uart.h  \
-CRC.h 
+Uart.h 

@@ -5,6 +5,8 @@
  * Created on 11 de Março de 2018, 14:00
  */
 
+#include <stdio.h>
+
 #include "Uart.h"
 #include "CRC.h"
 #include "ProtocollHandler.h"
@@ -54,6 +56,19 @@ void UartWriteASCII(const char *msg) {
         while (!U1STAbits.TRMT);
         U1Send(*msg);
     } while (*++msg);
+}
+
+void UartWriteInt(const unsigned long num) {
+    char buf[100];    
+    unsigned char i;
+
+    sprintf(buf, " %lu ", num);
+    i = 0;
+    while (buf[i]!='\0')
+    {
+        U1Send(buf[i++]);
+        while(!U1STAbits.TRMT);
+    }
 }
 
 void SendAck(const Variable *var) {

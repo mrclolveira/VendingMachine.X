@@ -11,6 +11,7 @@ void UartInit(void);
 void UartWrite(Protocoll *protocoll);
 void UartWriteByte(const unsigned char msg[], int size);
 void UartWriteASCII(const char *msg);
+void UartWriteInt(const unsigned long num);
 void SendAck(const Variable *var);
 void SendNack(void);
 void SendUnknownAddress(void);
