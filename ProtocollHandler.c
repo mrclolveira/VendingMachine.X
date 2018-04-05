@@ -5,10 +5,14 @@
  * Created on 11 de Março de 2018, 16:58
  */
 
+#include <xc.h>
+#include <libpic30.h>
+
 #include "ProtocollHandler.h"
 #include "Sensors.h"
 #include "RGB.h"
 #include "Task.h"
+#include "Uart.h"
 
 bool Handle(Protocoll *cmd) {
     if (cmd->header_.preamble_ != kFixedPreamble) {
@@ -28,7 +32,11 @@ bool HandleGetValues(Variable *var) {
     bool known = false;
     switch (var->address_) {
         case kAddressPresenceSensor:
-            var->value_.Integer = (uint64_t) IsPresenceSensorActive();
+            var->value_.Byte_4 = (uint8_t) IsPresenceSensorActive();
+            known = true;
+            break;
+        case kAddressDispenserSensor:
+            var->value_.Byte_4 = (uint8_t) IsDispenserOpen();
             known = true;
             break;
         default:
@@ -61,6 +69,10 @@ bool HandleSetValues(const Variable *var) {
             DoubleActuator(&var->value_);
             known = true;
             break;
+        case kAddressReset:
+            __asm__ volatile ("reset");
+            known = true;
+            break;
         default:
             known = false;
             break;
@@ -68,3 +80,24 @@ bool HandleSetValues(const Variable *var) {
     return known;
 }
 
+void SendPresenceStatus() {
+    Variable status;
+    status.address_ = kAddressPresenceSensor;
+    status.value_.Byte_1 = 0;
+    status.value_.Byte_2 = 0;
+    status.value_.Byte_3 = 0;
+    status.value_.Byte_4 = (uint8_t) IsPresenceSensorActive();
+
+    SendAck(&status);
+}
+
+void SendDispenserClosed() {
+    Variable status;
+    status.address_ = kAddressDispenserSensor;
+    status.value_.Byte_1 = 0;
+    status.value_.Byte_2 = 0;
+    status.value_.Byte_3 = 0;
+    status.value_.Byte_4 = (uint8_t) IsDispenserOpen();
+
+    SendAck(&status);
+}

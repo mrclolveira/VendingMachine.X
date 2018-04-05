@@ -50,6 +50,7 @@
 
 
 #include "Uart.h"
+#include "ProtocollHandler.h"
 #include "Sensors.h"
 #include "definitions.h"
 #include "Actuators.h"
@@ -60,17 +61,17 @@
 bool close_dispenser_ = false;
 
 void Setup() {
+    // Wait for hardware get stable
+    __delay_ms(2000);
+
     UartInit();
+    UartWriteInt(RCON);
+    RCON = 0;
     SensorsInit();
     ActuatorsInit();
     LEDInit();
     RGBInit();
-    InitLedThread();
 
-    // Wait for hardware get stable
-    __delay_ms(2000);
-
-    UartWriteASCII("Ligado");
     ReturnElevatorToTop();
 }
 
@@ -80,7 +81,12 @@ int main(void) {
     while(true) {
         if (close_dispenser_) {
             CloseDispenser();
+            SendDispenserClosed();
         }
+
+        SetLedOn(!LATFbits.LATF5);
+        SendPresenceStatus();
+        __delay_ms(500);
     }
     return 0;
 }

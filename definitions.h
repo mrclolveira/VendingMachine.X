@@ -13,15 +13,12 @@ typedef union {
     uint16_t integer;
 } Integer;
 
-typedef union {
-    struct {
-        uint8_t Byte_1;
-        uint8_t Byte_2;
-        uint8_t Byte_3;
-        uint8_t Byte_4;
-    };
-    uint64_t Integer;
-} Payload;
+typedef struct {
+    uint8_t Byte_1;
+    uint8_t Byte_2;
+    uint8_t Byte_3;
+    uint8_t Byte_4;
+}Payload;
 
 typedef struct {
     unsigned char preamble_;
@@ -34,8 +31,8 @@ typedef struct {
 } Variable;
 
 #define protocoll_size_ 9
-typedef struct {
-    union {
+typedef union {
+    struct {
         Header header_;
         Variable variable_;
         Integer crc_;
@@ -53,11 +50,13 @@ typedef struct {
 #define kUnknownProperty 0xFD
 
 #define kAddressPresenceSensor 0x10
+#define kAddressDispenserSensor 0x11
 #define kAddressRGB 0x20
 #define kAddressDoorLock 0x21
 #define kAddressAlignActuators 0x22
 #define kAddressSingleActuator 0x23
 #define kAddressDoubleActuator 0x24
+#define kAddressReset 0x26
 
 #endif	// DEFINITIONS_H
 

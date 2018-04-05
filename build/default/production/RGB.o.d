@@ -1,3 +1,5 @@
 build/default/production/RGB.o:  \
 RGB.c  \
-RGB.h 
+RGB.h  \
+Uart.h  \
+definitions.h 

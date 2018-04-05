@@ -5,6 +5,8 @@
  * Created on 11 de Março de 2018, 14:00
  */
 
+#include <stdio.h>
+
 #include "Uart.h"
 #include "CRC.h"
 #include "ProtocollHandler.h"
@@ -42,10 +44,11 @@ void UartWrite(Protocoll *protocoll) {
 }
 
 void UartWriteByte(const unsigned char msg[], int size) {
-    do {
+    int i = 0;
+    for (i = 0; i < size; i++) {
         while (!U1STAbits.TRMT);
-        U1Send(*msg);
-    } while (*++msg);
+        U1Send(msg[i]);
+    }
 }
 
 void UartWriteASCII(const char *msg) {
@@ -55,12 +58,28 @@ void UartWriteASCII(const char *msg) {
     } while (*++msg);
 }
 
+void UartWriteInt(const unsigned long num) {
+    char buf[100];    
+    unsigned char i;
+
+    sprintf(buf, " %lu ", num);
+    i = 0;
+    while (buf[i]!='\0')
+    {
+        U1Send(buf[i++]);
+        while(!U1STAbits.TRMT);
+    }
+}
+
 void SendAck(const Variable *var) {
     Protocoll ack;
     ack.header_.preamble_ = kFixedPreamble;
     ack.header_.property_ = kAckProperty;
     ack.variable_ = *var;
 
+    Integer crc;
+    crc.integer = CRC_HW_calculate(ack.bytes, protocoll_size_ - 2);
+    ack.crc_ = crc;
     UartWrite(&ack);
 }
 
@@ -92,21 +111,33 @@ void __attribute__((__interrupt__, no_auto_psv )) _ISR _U1RXInterrupt (void) {
     uint16_t timeout = 0;
     uint8_t i;
 
-    for (i = 0; i < sizeof(incoming_msg); i++) {
+    for (i = 0; i < protocoll_size_; i++) {
+        incoming_msg.bytes[i] = 0;
+    }
+
+    for (i = 0; i < protocoll_size_; i++) {
         while(!U1STAbits.URXDA && (++timeout<1000));
         if (U1STAbits.URXDA) {
             incoming_msg.bytes[i] = U1RXREG;
         } else {
             incoming_msg.bytes[i] = 0;
-            error = true;
         }
+        timeout = 0;
     }
 
-    if (incoming_msg.crc_.integer != CRC_HW_calculate(incoming_msg.bytes, sizeof(incoming_msg) - 2)) {
+    if (incoming_msg.bytes[0] != kFixedPreamble) {
         error = true;
     }
 
-    if (!error) {
+    Integer crc;
+    crc.High = incoming_msg.bytes[protocoll_size_ - 2];
+    crc.Low = incoming_msg.bytes[protocoll_size_ - 1];
+
+    if (crc.integer != CRC_HW_calculate(incoming_msg.bytes, protocoll_size_ - 2)) {
+        error = true;
+    }
+
+    if (error == false) {
         if (!Handle(&incoming_msg)) {
             SendUnknownAddress();
         } else {

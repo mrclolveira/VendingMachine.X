@@ -27,8 +27,8 @@
 
 #define ActuatorDispenser(x) LATDbits.LATD11 = x
 
-#define ActuatorElevatorUp(x) LATDbits.LATD10 = x
-#define ActuatorElevatorDown(x) LATDbits.LATD9 = x
+#define ActuatorElevatorUp(x) LATAbits.LATA4 = x
+#define ActuatorElevatorDown(x) LATAbits.LATA5 = x
 
 void ActuatorsInit(void) {
     TRISDbits.TRISD7 = 0;
@@ -53,8 +53,8 @@ void ActuatorsInit(void) {
 
     TRISDbits.TRISD11 = 0;
 
-    TRISDbits.TRISD10 = 0;
-    TRISDbits.TRISD9 = 0;
+    TRISAbits.TRISA4 = 0;
+    TRISAbits.TRISA5 = 0;
 
     CM3CONbits.CEN = 0;
     IEC0bits.INT0IE = 0;
