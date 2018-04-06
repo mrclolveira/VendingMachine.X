@@ -59,6 +59,7 @@
 #include "Task.h"
 
 bool close_dispenser_ = false;
+bool send_presence_status_ = false;
 
 void Setup() {
     // Wait for hardware get stable
@@ -84,8 +85,11 @@ int main(void) {
             SendDispenserClosed();
         }
 
+        if (send_presence_status_) {
+            SendPresenceStatus();
+        }
+
         SetLedOn(!LATFbits.LATF5);
-        SendPresenceStatus();
         __delay_ms(500);
     }
     return 0;

@@ -12,4 +12,6 @@ bool HandleSetValues(const Variable *var);
 void SendPresenceStatus();
 void SendDispenserClosed();
 
+extern bool send_presence_status_;
+
 #endif	// PROTOCOLLHANDLER_H

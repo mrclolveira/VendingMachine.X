@@ -69,6 +69,10 @@ bool HandleSetValues(const Variable *var) {
             DoubleActuator(&var->value_);
             known = true;
             break;
+        case kAddressSendPresenceStatus:
+            send_presence_status_ = (bool) var->value_.Byte_4;
+            known = true;
+            break;
         case kAddressReset:
             __asm__ volatile ("reset");
             known = true;

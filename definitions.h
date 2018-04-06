@@ -56,6 +56,7 @@ typedef union {
 #define kAddressAlignActuators 0x22
 #define kAddressSingleActuator 0x23
 #define kAddressDoubleActuator 0x24
+#define kAddressSendPresenceStatus 0x25
 #define kAddressReset 0x26
 
 #endif	// DEFINITIONS_H
