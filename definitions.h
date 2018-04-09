@@ -46,6 +46,7 @@ typedef union {
 #define kSetProperty 0x00
 #define kGetProperty 0x01
 #define kAckProperty 0x02
+#define kRunProperty 0x03
 #define kFaultProperty 0xFF
 #define kUnknownProperty 0xFD
 

@@ -83,6 +83,18 @@ void SendAck(const Variable *var) {
     UartWrite(&ack);
 }
 
+void SendRun(const Variable *var) {
+    Protocoll run;
+    run.header_.preamble_ = kFixedPreamble;
+    run.header_.property_ = kRunProperty;
+    run.variable_ = *var;
+
+    Integer crc;
+    crc.integer = CRC_HW_calculate(run.bytes, protocoll_size_ - 2);
+    run.crc_ = crc;
+    UartWrite(&run);
+}
+
 void SendNack(void) {
     unsigned char nack[] = {kFixedPreamble, kFaultProperty, 0x00, 0x00};
 

@@ -54,18 +54,22 @@ bool HandleSetValues(const Variable *var) {
             known = true;
             break;
         case kAddressDoorLock:
+            SendRun(var);
             UnlockDoor(&var->value_);
             known = true;
             break;
         case kAddressAlignActuators:
+            SendRun(var);
             AlignActuators();
             known = true;
             break;
         case kAddressSingleActuator:
+            SendRun(var);
             SingleActuator(&var->value_);
             known = true;
             break;
         case kAddressDoubleActuator:
+            SendRun(var);
             DoubleActuator(&var->value_);
             known = true;
             break;
@@ -74,6 +78,7 @@ bool HandleSetValues(const Variable *var) {
             known = true;
             break;
         case kAddressReturnElevator:
+            SendRun(var);
             ReturnElevatorToTop((bool) var->value_.Byte_4);
             known = true;
             break;
