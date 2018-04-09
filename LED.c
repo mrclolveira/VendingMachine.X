@@ -12,6 +12,7 @@
 
 void LEDInit(void) {
     TRISFbits.TRISF5 = 0;
+    led(true);
 }
 
 void SetLedOn(bool on) {

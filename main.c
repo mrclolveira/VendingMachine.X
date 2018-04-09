@@ -62,8 +62,14 @@ bool close_dispenser_ = false;
 bool send_presence_status_ = false;
 
 void Setup() {
-    // Wait for hardware get stable
-    __delay_ms(2000);
+    CLKDIV =  0;
+    ANSA = 0;
+    ANSB = 0;
+    ANSC = 0;
+    ANSD = 0;
+    ANSE = 0;
+    ANSF = 0;
+    ANSG = 0;
 
     UartInit();
     UartWriteInt(RCON);
@@ -73,13 +79,13 @@ void Setup() {
     LEDInit();
     RGBInit();
 
-    ReturnElevatorToTop();
+//    ReturnElevatorToTop();
 }
 
 int main(void) {
     Setup();
 
-    while(true) {
+    while(1) {
         if (close_dispenser_) {
             CloseDispenser();
             SendDispenserClosed();

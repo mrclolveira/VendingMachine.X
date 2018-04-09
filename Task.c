@@ -64,10 +64,10 @@ bool AlignActuators() {
 }
 
 bool SingleActuator(const Payload *value) {
-    if (!ReturnElevatorToTop()) {
+    if (!ReturnElevatorToTop(value->Byte_1)) {
         return false;
     }
-    if (!DownToLine(value->Byte_4, kLimitTopLIne)) {
+    if (!DownToLine(value->Byte_4, kLimitTopLIne, value->Byte_1)) {
         return false;
     }
     __delay_ms(100);
@@ -75,24 +75,24 @@ bool SingleActuator(const Payload *value) {
         return false;
     }
     __delay_ms(200);
-    if (!DownToLine(kLimitBottomLine, value->Byte_4)) {
+    if (!DownToLine(kLimitBottomLine, value->Byte_4, value->Byte_1)) {
         return false;
     }
     __delay_ms(300);
     if (!OpenDispenser()) {
         return false;
     }
-    if (!ReturnElevatorToTop()) {
+    if (!ReturnElevatorToTop(value->Byte_1)) {
         return false;
     }
     return true;
 }
 
 bool DoubleActuator(const Payload *value) {
-    if (!ReturnElevatorToTop()) {
+    if (!ReturnElevatorToTop(value->Byte_1)) {
         return false;
     }
-    if (!DownToLine(value->Byte_4, kLimitTopLIne)) {
+    if (!DownToLine(value->Byte_4, kLimitTopLIne, value->Byte_1)) {
         return false;
     }
     __delay_ms(100);
@@ -100,38 +100,38 @@ bool DoubleActuator(const Payload *value) {
         return false;
     }
     __delay_ms(200);
-    if (!DownToLine(kLimitBottomLine, value->Byte_4)) {
+    if (!DownToLine(kLimitBottomLine, value->Byte_4, value->Byte_1)) {
         return false;
     }
     __delay_ms(300);
     if (!OpenDispenser()) {
         return false;
     }
-    if (!ReturnElevatorToTop()) {
+    if (!ReturnElevatorToTop(value->Byte_1)) {
         return false;
     }
     return true;
 }
 
-bool ReturnElevatorToTop(void) {
+bool ReturnElevatorToTop(bool rele) {
     uint16_t timeout = 10000;
     uint16_t time = 0;
-    SetElevatorOn(kUp, true);
+    SetElevatorOn(kUp, rele);
 
     while (!IsElevatorSensorActive(kEndLimit) && (++time<timeout)) {
         __delay_ms(1);
     }
 
-    SetElevatorOn(kUp, false);
+    SetElevatorOn(kStoped, rele);
     return (time < timeout);
 }
 
-bool DownToLine(const uint8_t line, uint8_t current_line) {
+bool DownToLine(const uint8_t line, uint8_t current_line, bool rele) {
     if (line == current_line) {
         return true;
     }
 
-    SetElevatorOn(kDown, true);
+    SetElevatorOn(kDown, rele);
     uint16_t timeout = 10000;
     uint16_t time = 0;
     uint16_t timeout_internal = 1000;
@@ -154,7 +154,7 @@ bool DownToLine(const uint8_t line, uint8_t current_line) {
             break;
         }
     }
-    SetElevatorOn(kDown, false);
+    SetElevatorOn(kStoped, rele);
     return (time < timeout) || (time_internal > timeout_internal);
 }
 

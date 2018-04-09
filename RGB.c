@@ -9,6 +9,13 @@
 #include "Uart.h"
 
 void RGBInit(void) {
+    TRISGbits.TRISG6 = 0;
+    LATGbits.LATG6 = 1;
+    TRISGbits.TRISG7 = 0;
+    LATGbits.LATG7 = 1;
+    TRISGbits.TRISG8 = 0;
+    LATGbits.LATG8 = 1;
+
     __builtin_write_OSCCONL(OSCCON & 0xbf);
     RPOR10bits.RP21R = 18;
     RPOR13bits.RP26R = 19;

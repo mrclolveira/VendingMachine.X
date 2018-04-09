@@ -29,6 +29,8 @@
 
 #define ActuatorElevatorUp(x) LATAbits.LATA4 = x
 #define ActuatorElevatorDown(x) LATAbits.LATA5 = x
+#define ActuatorElevatorReleUp(x) LATDbits.LATD10 = x
+#define ActuatorElevatorReleDown(x) LATDbits.LATD9 = x
 
 void ActuatorsInit(void) {
     TRISDbits.TRISD7 = 0;
@@ -38,6 +40,7 @@ void ActuatorsInit(void) {
     TRISFbits.TRISF1 = 0;
     TRISGbits.TRISG1 = 0;
     TRISGbits.TRISG0 = 0;
+    SetLineMotorOn(0xFF, false);
 
     TRISDbits.TRISD1 = 0;
     TRISDbits.TRISD2 = 0;
@@ -48,13 +51,21 @@ void ActuatorsInit(void) {
     TRISDbits.TRISD5 = 0;
     TRISDbits.TRISD6 = 0;
     ANSDbits.ANSD6 = 0;
+    SetColumnMotorOn(0xFF, false);
 
     TRISDbits.TRISD0 = 0;
+    ActuatorLock(false);
 
     TRISDbits.TRISD11 = 0;
+    ActuatorDispenser(false);
 
     TRISAbits.TRISA4 = 0;
     TRISAbits.TRISA5 = 0;
+    SetElevatorOn(kStoped, false);
+
+    TRISDbits.TRISD10 = 0;
+    TRISDbits.TRISD11 = 0;
+    SetElevatorOn(kStoped, true);
 
     CM3CONbits.CEN = 0;
     IEC0bits.INT0IE = 0;
@@ -135,10 +146,30 @@ void SetDispenserOn(bool on) {
     ActuatorDispenser(on);
 }
 
-void SetElevatorOn(const ElevatorDirection direction, bool on) {
+void SetElevatorOn(const ElevatorDirection direction, bool rele) {
     if (direction == kUp) {
-        ActuatorElevatorUp(on);
+        if (rele) {
+            ActuatorElevatorReleUp(true);
+            ActuatorElevatorReleDown(false);
+        } else {
+            ActuatorElevatorUp(true);
+            ActuatorElevatorDown(false);
+        }
+    } else if (direction == kDown) {
+        if (rele) {
+            ActuatorElevatorReleUp(false);
+            ActuatorElevatorReleDown(true);
+        } else {
+            ActuatorElevatorUp(false);
+            ActuatorElevatorDown(true);
+        }
     } else {
-        ActuatorElevatorDown(on);
+        if (rele) {
+            ActuatorElevatorReleUp(false);
+            ActuatorElevatorReleDown(false);
+        } else {
+            ActuatorElevatorUp(false);
+            ActuatorElevatorDown(false);
+        }
     }
 }

@@ -14,10 +14,11 @@ void SetDispenserOn(bool on);
 
 enum Direction {
     kUp,
-    kDown
+    kDown,
+    kStoped
 };
 typedef enum Direction ElevatorDirection;
-void SetElevatorOn(const ElevatorDirection direction, bool on);
+void SetElevatorOn(const ElevatorDirection direction, bool rele);
 
 #endif	// ACTUATORS_H
 

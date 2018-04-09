@@ -46,6 +46,7 @@ void SensorsInit(void) {
     TRISGbits.TRISG13 = 0;
     TRISEbits.TRISE2 = 0;
     TRISEbits.TRISE3 = 0;
+    SetOnSensor(0xFF, false);
 
     TRISAbits.TRISA3 = 1;
     TRISAbits.TRISA2 = 1;
