@@ -79,7 +79,7 @@ bool SingleActuator(const Payload *value) {
         return false;
     }
     __delay_ms(300);
-    if (!OpenDispenser()) {
+    if (!OpenDispenser(value->Byte_1)) {
         return false;
     }
     if (!ReturnElevatorToTop(value->Byte_1)) {
@@ -104,7 +104,7 @@ bool DoubleActuator(const Payload *value) {
         return false;
     }
     __delay_ms(300);
-    if (!OpenDispenser()) {
+    if (!OpenDispenser(value->Byte_1)) {
         return false;
     }
     if (!ReturnElevatorToTop(value->Byte_1)) {
@@ -155,7 +155,7 @@ bool DownToLine(const uint8_t line, uint8_t current_line, bool rele) {
         }
     }
     SetElevatorOn(kStoped, rele);
-    return (time < timeout) || (time_internal > timeout_internal);
+    return (time < timeout) || (time_internal < timeout_internal);
 }
 
 bool ActuateAt(bool single, const uint8_t line, const uint8_t row_one, const uint8_t row_two) {
@@ -222,10 +222,33 @@ bool ActuateAt(bool single, const uint8_t line, const uint8_t row_one, const uin
     return (time < timeout);
 }
 
-bool OpenDispenser(void) {
+bool OpenDispenser(bool rele) {
     SetDispenserOn(true);
     uint16_t timeout = 10000;
     uint16_t time = 0;
+
+    uint8_t current_line = 0;
+    uint8_t line = 1;
+
+    SetElevatorOn(kUp, rele);
+    while (IsElevatorSensorActive(kLevel)) {
+        __delay_ms(1);
+    }
+    while (current_line < line && (++time<timeout)) {
+        __delay_ms(1);
+        if (IsElevatorSensorActive(kLevel)) {
+            ++current_line;
+        }
+        if (time > timeout) {
+            break;
+        }
+    }
+    SetElevatorOn(kStoped, rele);
+    if (time >= timeout) {
+        return false;
+    }
+
+    timeout = 0;
     while (!IsDispenserOpen() && (++time<timeout)) {
         __delay_ms(1);
     }
