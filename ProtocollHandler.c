@@ -73,6 +73,10 @@ bool HandleSetValues(const Variable *var) {
             send_presence_status_ = (bool) var->value_.Byte_4;
             known = true;
             break;
+        case kAddressReturnElevator:
+            ReturnElevatorToTop((bool) var->value_.Byte_4);
+            known = true;
+            break;
         case kAddressReset:
             __asm__ volatile ("reset");
             known = true;
