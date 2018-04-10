@@ -58,11 +58,11 @@
 #include "RGB.h"
 #include "Task.h"
 
-bool close_dispenser_ = false;
-bool send_presence_status_ = false;
+uint8_t close_dispenser_ = false;
+uint8_t send_presence_status_ = false;
 
 void Setup() {
-    CLKDIV =  0;
+//    CLKDIV =  0;
     ANSA = 0;
     ANSB = 0;
     ANSC = 0;

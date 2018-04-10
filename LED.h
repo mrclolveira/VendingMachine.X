@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 void LEDInit(void);
-void SetLedOn(bool on);
+void SetLedOn(uint8_t on);
 
 #endif	// LED_H
 

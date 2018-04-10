@@ -7,10 +7,10 @@
 
 void ActuatorsInit(void);
 
-void SetLineMotorOn(const uint8_t line, bool on);
-void SetColumnMotorOn(const uint8_t column, bool on);
-void SetLockOn(bool on);
-void SetDispenserOn(bool on);
+void SetLineMotorOn(const uint8_t line, uint8_t on);
+void SetColumnMotorOn(const uint8_t column, uint8_t on);
+void SetLockOn(uint8_t on);
+void SetDispenserOn(uint8_t on);
 
 enum Direction {
     kUp,
@@ -18,7 +18,7 @@ enum Direction {
     kStoped
 };
 typedef enum Direction ElevatorDirection;
-void SetElevatorOn(const ElevatorDirection direction, bool rele);
+void SetElevatorOn(const ElevatorDirection direction, uint8_t rele);
 
 #endif	// ACTUATORS_H
 

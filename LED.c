@@ -15,6 +15,6 @@ void LEDInit(void) {
     led(true);
 }
 
-void SetLedOn(bool on) {
+void SetLedOn(uint8_t on) {
     led(on);
 }

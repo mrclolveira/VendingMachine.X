@@ -119,7 +119,7 @@ void SendUnknownAddress(void) {
 
 void __attribute__((__interrupt__, no_auto_psv )) _ISR _U1RXInterrupt (void) {
     Protocoll incoming_msg;
-    bool error = false;
+    uint8_t error = false;
     uint16_t timeout = 0;
     uint8_t i;
 

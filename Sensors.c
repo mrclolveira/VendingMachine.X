@@ -63,7 +63,7 @@ void SensorsInit(void) {
 }
 
 
-void SetOnSensor(const uint8_t column, bool on) {
+void SetOnSensor(const uint8_t column, uint8_t on) {
     switch (column) {
         case 0:
             SensorOutColumn0(on);
@@ -102,8 +102,8 @@ void SetOnSensor(const uint8_t column, bool on) {
     }
 }
 
-bool IsSensorLineActive(const uint8_t line) {
-    bool result = false;
+uint8_t IsSensorLineActive(const uint8_t line) {
+    uint8_t result = false;
     switch (line) {
         case 0:
             result = !SensorInLine0;
@@ -127,16 +127,16 @@ bool IsSensorLineActive(const uint8_t line) {
     return result;
 }
 
-bool IsDispenserOpen(void) {
+uint8_t IsDispenserOpen(void) {
     return !SensorDispenser;
 }
 
-bool IsPresenceSensorActive(void) {
+uint8_t IsPresenceSensorActive(void) {
     return SensorPresence;
 }
 
-bool IsElevatorSensorActive(const ElevatorSensors sensor) {
-    bool result = false;
+uint8_t IsElevatorSensorActive(const ElevatorSensors sensor) {
+    uint8_t result = false;
 
     if (sensor == kLevel) {
         result = !SensorElevatorLevel;

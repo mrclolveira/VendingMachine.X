@@ -61,7 +61,7 @@ void ActuatorsInit(void) {
 
     TRISAbits.TRISA4 = 0;
     TRISAbits.TRISA5 = 0;
-    SetElevatorOn(kStoped, false);
+//    SetElevatorOn(kStoped, false);
 
     TRISDbits.TRISD10 = 0;
     TRISDbits.TRISD11 = 0;
@@ -72,7 +72,7 @@ void ActuatorsInit(void) {
 }
 
 
-void SetLineMotorOn(const uint8_t line, bool on) {
+void SetLineMotorOn(const uint8_t line, uint8_t on) {
     switch (line) {
         case 0:
             ActuatorLine0(!on);
@@ -99,7 +99,7 @@ void SetLineMotorOn(const uint8_t line, bool on) {
     }
 }
 
-void SetColumnMotorOn(const uint8_t column, bool on) {
+void SetColumnMotorOn(const uint8_t column, uint8_t on) {
     switch (column) {
         case 0:
             ActuatorColumn0(on);
@@ -138,15 +138,15 @@ void SetColumnMotorOn(const uint8_t column, bool on) {
     }
 }
 
-void SetLockOn(bool on) {
+void SetLockOn(uint8_t on) {
     ActuatorLock(on);
 }
 
-void SetDispenserOn(bool on) {
+void SetDispenserOn(uint8_t on) {
     ActuatorDispenser(on);
 }
 
-void SetElevatorOn(const ElevatorDirection direction, bool rele) {
+void SetElevatorOn(const ElevatorDirection direction, uint8_t rele) {
     if (direction == kUp) {
         if (rele) {
             ActuatorElevatorReleUp(true);

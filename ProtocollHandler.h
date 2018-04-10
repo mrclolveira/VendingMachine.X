@@ -6,12 +6,12 @@
 #include <stdbool.h>
 #include "definitions.h"
 
-bool Handle(Protocoll *cmd);
-bool HandleGetValues(Variable *var);
-bool HandleSetValues(const Variable *var);
+uint8_t Handle(Protocoll *cmd);
+uint8_t HandleGetValues(Variable *var);
+uint8_t HandleSetValues(const Variable *var);
 void SendPresenceStatus();
 void SendDispenserClosed();
 
-extern bool send_presence_status_;
+extern uint8_t send_presence_status_;
 
 #endif	// PROTOCOLLHANDLER_H

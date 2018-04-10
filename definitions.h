@@ -3,7 +3,6 @@
 #define	DEFINITIONS_H
 
 #include <xc.h>
-#include <stdbool.h>
 
 typedef union {
     struct {

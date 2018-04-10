@@ -7,17 +7,17 @@
 
 void SensorsInit(void);
 
-void SetOnSensor(const uint8_t column, bool on);
-bool IsSensorLineActive(const uint8_t line);
-bool IsDispenserOpen(void);
-bool IsPresenceSensorActive(void);
+void SetOnSensor(const uint8_t column, uint8_t on);
+uint8_t IsSensorLineActive(const uint8_t line);
+uint8_t IsDispenserOpen(void);
+uint8_t IsPresenceSensorActive(void);
 
 enum sensor_elevator {
     kLevel,
     kEndLimit
 };
 typedef enum sensor_elevator ElevatorSensors;
-bool IsElevatorSensorActive(const ElevatorSensors sensor);
+uint8_t IsElevatorSensorActive(const ElevatorSensors sensor);
 
 #endif	// SENSORS_H
 

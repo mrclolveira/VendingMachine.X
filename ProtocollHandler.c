@@ -14,7 +14,7 @@
 #include "Task.h"
 #include "Uart.h"
 
-bool Handle(Protocoll *cmd) {
+uint8_t Handle(Protocoll *cmd) {
     if (cmd->header_.preamble_ != kFixedPreamble) {
         return false;
     }
@@ -28,8 +28,8 @@ bool Handle(Protocoll *cmd) {
     return false;
 }
 
-bool HandleGetValues(Variable *var) {
-    bool known = false;
+uint8_t HandleGetValues(Variable *var) {
+    uint8_t known = false;
     switch (var->address_) {
         case kAddressPresenceSensor:
             var->value_.Byte_4 = (uint8_t) IsPresenceSensorActive();
@@ -46,8 +46,8 @@ bool HandleGetValues(Variable *var) {
     return known;
 }
 
-bool HandleSetValues(const Variable *var) {
-    bool known = false;
+uint8_t HandleSetValues(const Variable *var) {
+    uint8_t known = false;
     switch (var->address_) {
         case kAddressRGB:
             SetRGB(var->value_.Byte_1, var->value_.Byte_2, var->value_.Byte_3);
@@ -60,27 +60,23 @@ bool HandleSetValues(const Variable *var) {
             break;
         case kAddressAlignActuators:
             SendRun(var);
-            AlignActuators();
-            known = true;
+            known = AlignActuators();
             break;
         case kAddressSingleActuator:
             SendRun(var);
-            SingleActuator(&var->value_);
-            known = true;
+            known = SingleActuator(&var->value_);;
             break;
         case kAddressDoubleActuator:
             SendRun(var);
-            DoubleActuator(&var->value_);
-            known = true;
+            known = DoubleActuator(&var->value_);
             break;
         case kAddressSendPresenceStatus:
-            send_presence_status_ = (bool) var->value_.Byte_4;
+            send_presence_status_ = var->value_.Byte_4;
             known = true;
             break;
         case kAddressReturnElevator:
             SendRun(var);
-            ReturnElevatorToTop((bool) var->value_.Byte_4);
-            known = true;
+            known = ReturnElevatorToTop(var->value_.Byte_4);
             break;
         case kAddressReset:
             __asm__ volatile ("reset");
