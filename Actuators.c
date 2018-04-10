@@ -73,21 +73,27 @@ void ActuatorsInit(void) {
 
 
 void SetLineMotorOn(const uint8_t line, uint8_t on) {
+    uint8_t on_invert = false;
+    if (on == false) {
+        on_invert = true;
+    } else {
+        on_invert = false;
+    }
     switch (line) {
         case 0:
-            ActuatorLine0(!on);
+            ActuatorLine0(on_invert);
             break;
         case 1:
-            ActuatorLine1(!on);
+            ActuatorLine1(on_invert);
             break;
         case 2:
-            ActuatorLine2(!on);
+            ActuatorLine2(on_invert);
             break;
         case 3:
-            ActuatorLine3(!on);
+            ActuatorLine3(on_invert);
             break;
         case 4:
-            ActuatorLine4(!on);
+            ActuatorLine4(on_invert);
             break;
         default:
             ActuatorLine0(true);

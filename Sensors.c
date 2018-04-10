@@ -106,19 +106,39 @@ uint8_t IsSensorLineActive(const uint8_t line) {
     uint8_t result = false;
     switch (line) {
         case 0:
-            result = !SensorInLine0;
+            if (SensorInLine0 == false) {
+                result = true;
+            } else {
+                result = false;
+            }
             break;
         case 1:
-            result = !SensorInLine1;
+            if (SensorInLine1 == false) {
+                result = true;
+            } else {
+                result = false;
+            }
             break;
         case 2:
-            result = !SensorInLine2;
+            if (SensorInLine2 == false) {
+                result = true;
+            } else {
+                result = false;
+            }
             break;
         case 3:
-            result = !SensorInLine3;
+            if (SensorInLine3 == false) {
+                result = true;
+            } else {
+                result = false;
+            }
             break;
         case 4:
-            result = !SensorInLine4;
+            if (SensorInLine4) {
+                result = true;
+            } else {
+                result = false;
+            }
             break;
         default:
             result = false;
@@ -128,21 +148,35 @@ uint8_t IsSensorLineActive(const uint8_t line) {
 }
 
 uint8_t IsDispenserOpen(void) {
-    return !SensorDispenser;
+    if (SensorDispenser == false) {
+        return true;
+    }
+    return false;
 }
 
 uint8_t IsPresenceSensorActive(void) {
-    return SensorPresence;
+    if (SensorPresence == true) {
+        return true;
+    }
+    return false;
 }
 
 uint8_t IsElevatorSensorActive(const ElevatorSensors sensor) {
     uint8_t result = false;
 
     if (sensor == kLevel) {
-        result = !SensorElevatorLevel;
+        if (SensorElevatorLevel == false) {
+            result = true;
+        } else {
+            result = false;
+        }
     }
     if (sensor == kEndLimit) {
-        result = !SensorElevatorEndLimit;
+        if (SensorElevatorEndLimit == false) {
+            result = true;
+        } else {
+            result = false;
+        }
     }
     return result;
 }
