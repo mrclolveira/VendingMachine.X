@@ -87,8 +87,8 @@ int main(void) {
 
     while(1) {
         if (close_dispenser_) {
-            CloseDispenser();
             SendDispenserClosed();
+            CloseDispenser();
         }
 
         if (send_presence_status_) {

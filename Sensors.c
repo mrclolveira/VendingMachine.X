@@ -134,7 +134,7 @@ uint8_t IsSensorLineActive(const uint8_t line) {
             }
             break;
         case 4:
-            if (SensorInLine4) {
+            if (SensorInLine4 == false) {
                 result = true;
             } else {
                 result = false;

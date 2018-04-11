@@ -64,7 +64,7 @@ void ActuatorsInit(void) {
 //    SetElevatorOn(kStoped, false);
 
     TRISDbits.TRISD10 = 0;
-    TRISDbits.TRISD11 = 0;
+    TRISDbits.TRISD9 = 0;
     SetElevatorOn(kStoped, true);
 
     CM3CONbits.CEN = 0;
