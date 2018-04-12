@@ -157,6 +157,10 @@ void __attribute__((__interrupt__, no_auto_psv )) _ISR _U1RXInterrupt (void) {
         CloseDispenser();
     } else if (incoming_msg.bytes[0] == 0x09) {
         AlignActuators();
+    } else if (incoming_msg.bytes[0] == 0x0A) {
+        GoElevatorToDown(true);
+    } else if (incoming_msg.bytes[0] == 0x0B) {
+        GoElevatorToDown(false);
     }
 
     if (incoming_msg.bytes[0] != kFixedPreamble) {

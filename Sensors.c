@@ -25,10 +25,14 @@
 
 #define SensorElevatorLevel PORTAbits.RA3
 #define SensorElevatorEndLimit PORTAbits.RA2
+#define SensorElevatorEndLimitDown PORTBbits.RB2
 
-#define SensorDispenser PORTBbits.RB3
+#define SensorDispenser PORTGbits.RG2
 
 #define SensorPresence PORTFbits.RF3
+
+#define ButtonUp PORTFbits.RF7
+#define ButtonDown PORTGbits.RG3
 
 void SensorsInit(void) {
     TRISEbits.TRISE4 = 1;
@@ -50,18 +54,20 @@ void SensorsInit(void) {
 
     TRISAbits.TRISA3 = 1;
     TRISAbits.TRISA2 = 1;
+    TRISBbits.TRISB2 = 1;
+    ANSBbits.ANSB2 = 0;
 
-    TRISBbits.TRISB3 = 1;
-    ANSBbits.ANSB3 = 0;
+    TRISGbits.TRISG2 = 1;
+
+    TRISFbits.TRISF3 = 1;
+
     TRISGbits.TRISG3 = 1;
-
     TRISFbits.TRISF3 = 1;
 
     I2C2CONbits.I2CEN = 0;
     I2C3CONbits.I2CEN = 0;
     PMCON1bits.PMPEN = 0;
 }
-
 
 void SetOnSensor(const uint8_t column, uint8_t on) {
     switch (column) {
@@ -178,5 +184,26 @@ uint8_t IsElevatorSensorActive(const ElevatorSensors sensor) {
             result = false;
         }
     }
+    if (sensor == kEndLimitDown) {
+        if (SensorElevatorEndLimitDown == false) {
+            result = true;
+        } else {
+            result = false;
+        }
+    }
     return result;
+}
+
+uint8_t IsButtonUpActive() {
+    if (ButtonUp == false) {
+        return true;
+    }
+    return false;
+}
+
+uint8_t IsButtonDownActive() {
+    if (ButtonDown == false) {
+        return true;
+    }
+    return false;
 }

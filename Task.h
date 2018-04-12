@@ -16,6 +16,8 @@ uint8_t AlignActuators();
 uint8_t SingleActuator(const Payload *value);
 uint8_t DoubleActuator(const Payload *value);
 uint8_t ReturnElevatorToTop(uint8_t rele);
+uint8_t GoElevatorToDown(uint8_t rele);
+uint8_t DownElevatorLitleBit(uint8_t rele);
 uint8_t DownToLine(const uint8_t line, uint8_t current_line, uint8_t rele);
 uint8_t ActuateSingleAt(const uint8_t line, const uint8_t row);
 uint8_t ActuateDoubleAt(const uint8_t line, const uint8_t row_one, const uint8_t row_two);

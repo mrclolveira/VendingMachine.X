@@ -75,7 +75,7 @@ uint8_t SingleActuator(const Payload *value) {
         return false;
     }
     __delay_ms(200);
-    if (DownToLine(kLimitBottomLine, value->Byte_4, value->Byte_1) == false) {
+    if (GoElevatorToDown(value->Byte_1) == false) {
         return false;
     }
     __delay_ms(300);
@@ -100,7 +100,7 @@ uint8_t DoubleActuator(const Payload *value) {
         return false;
     }
     __delay_ms(200);
-    if (DownToLine(kLimitBottomLine, value->Byte_4, value->Byte_1) == false) {
+    if (GoElevatorToDown(value->Byte_1) == false) {
         return false;
     }
     __delay_ms(300);
@@ -126,6 +126,31 @@ uint8_t ReturnElevatorToTop(uint8_t rele) {
     if (time >= timeout) {
         return false;
     }
+    return true;
+}
+
+uint8_t GoElevatorToDown(uint8_t rele) {
+    uint16_t timeout = 30000;
+    uint16_t time = 0;
+    SetElevatorOn(kDown, rele);
+
+    while (!IsElevatorSensorActive(kEndLimitDown) && (++time<timeout)) {
+        __delay_ms(1);
+    }
+
+    SetElevatorOn(kStoped, rele);
+    if (time >= timeout) {
+        return false;
+    }
+    return true;
+}
+
+uint8_t DownElevatorLitleBit(uint8_t rele) {
+    SetElevatorOn(kDown, rele);
+    while (IsButtonDownActive() && !IsElevatorSensorActive(kEndLimitDown)) {
+        __delay_ms(1);
+    }
+    SetElevatorOn(kStoped, rele);
     return true;
 }
 

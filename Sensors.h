@@ -14,10 +14,13 @@ uint8_t IsPresenceSensorActive(void);
 
 enum sensor_elevator {
     kLevel,
-    kEndLimit
+    kEndLimit,
+    kEndLimitDown
 };
 typedef enum sensor_elevator ElevatorSensors;
 uint8_t IsElevatorSensorActive(const ElevatorSensors sensor);
+uint8_t IsButtonUpActive();
+uint8_t IsButtonDownActive();
 
 #endif	// SENSORS_H
 

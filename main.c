@@ -62,7 +62,6 @@ uint8_t close_dispenser_ = false;
 uint8_t send_presence_status_ = false;
 
 void Setup() {
-//    CLKDIV =  0;
     ANSA = 0;
     ANSB = 0;
     ANSC = 0;
@@ -93,6 +92,14 @@ int main(void) {
 
         if (send_presence_status_) {
             SendPresenceStatus();
+        }
+
+        if (IsButtonUpActive()) {
+            ReturnElevatorToTop(true);
+        }
+
+        if (IsButtonDownActive()) {
+            DownElevatorLitleBit(true);
         }
 
         SetLedOn(!LATFbits.LATF5);
