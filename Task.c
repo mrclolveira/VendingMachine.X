@@ -64,28 +64,52 @@ uint8_t AlignActuators() {
 }
 
 uint8_t SingleActuator(const Payload *value) {
-    ReturnElevatorToTop(value->Byte_1);
-    DownToLine(value->Byte_4, kLimitTopLIne, value->Byte_1);
+    if (ReturnElevatorToTop(value->Byte_1) == false) {
+        return false;
+    }
+    if (DownToLine(value->Byte_4, kLimitTopLIne, value->Byte_1) == false) {
+        return false;
+    }
     __delay_ms(100);
-    ActuateSingleAt(value->Byte_4, value->Byte_3);
+    if (ActuateSingleAt(value->Byte_4, value->Byte_3) == false) {
+        return false;
+    }
     __delay_ms(200);
-    DownToLine(kLimitBottomLine, value->Byte_4, value->Byte_1);
+    if (DownToLine(kLimitBottomLine, value->Byte_4, value->Byte_1) == false) {
+        return false;
+    }
     __delay_ms(300);
-    OpenDispenser(value->Byte_1, false);
-    ReturnElevatorToTop(value->Byte_1);
+    if (OpenDispenser(value->Byte_1, false) == false) {
+        return false;
+    }
+    if (ReturnElevatorToTop(value->Byte_1) == false) {
+        return false;
+    }
     return true;
 }
 
 uint8_t DoubleActuator(const Payload *value) {
-    ReturnElevatorToTop(value->Byte_1);
-    DownToLine(value->Byte_4, kLimitTopLIne, value->Byte_1);
+    if (ReturnElevatorToTop(value->Byte_1) == false) {
+        return false;
+    }
+    if (DownToLine(value->Byte_4, kLimitTopLIne, value->Byte_1) == false) {
+        return false;
+    }
     __delay_ms(100);
-    ActuateDoubleAt(value->Byte_4, value->Byte_3, value->Byte_2);
+    if (ActuateDoubleAt(value->Byte_4, value->Byte_3, value->Byte_2) == false) {
+        return false;
+    }
     __delay_ms(200);
-    DownToLine(kLimitBottomLine, value->Byte_4, value->Byte_1);
+    if (DownToLine(kLimitBottomLine, value->Byte_4, value->Byte_1) == false) {
+        return false;
+    }
     __delay_ms(300);
-    OpenDispenser(value->Byte_1, false);
-    ReturnElevatorToTop(value->Byte_1);
+    if (OpenDispenser(value->Byte_1, false) == false) {
+        return false;
+    }
+    if (ReturnElevatorToTop(value->Byte_1) == false) {
+        return false;
+    }
     return true;
 }
 
@@ -99,6 +123,9 @@ uint8_t ReturnElevatorToTop(uint8_t rele) {
     }
 
     SetElevatorOn(kStoped, rele);
+    if (time >= timeout) {
+        return false;
+    }
     return true;
 }
 
@@ -126,17 +153,20 @@ uint8_t DownToLine(const uint8_t line, uint8_t current_line, uint8_t rele) {
                 while (IsElevatorSensorActive(kLevel) && (++time_internal<timeout_internal)) {
                     __delay_ms(1);
                 }
-                time_internal = 0;
             }
             if (time_internal > timeout_internal) {
                 break;
             }
+            time_internal = 0;
         }
         if (time > timeout) {
             break;
         }
     }
     SetElevatorOn(kStoped, rele);
+    if (time >= timeout || time_internal >= timeout_internal) {
+        return false;
+    }
     return true;
 }
 
@@ -159,6 +189,9 @@ uint8_t ActuateSingleAt(const uint8_t line, const uint8_t row) {
     SetLineMotorOn(0xFF, false);
     SetOnSensor(0xFF, false);
     SetLedOn(false);
+    if (time >= timeout) {
+        return false;
+    }
     return true;
 }
 
@@ -208,6 +241,9 @@ uint8_t ActuateDoubleAt(const uint8_t line, const uint8_t row_one, const uint8_t
     SetColumnMotorOn(0xFF, false);
     SetLineMotorOn(0xFF, false);
     SetLedOn(false);
+    if (time >= timeout) {
+        return false;
+    }
     return true;
 }
 
@@ -239,6 +275,7 @@ uint8_t OpenDispenser(uint8_t rele, uint8_t turn_off_elevator) {
             if (time_internal > timeout_internal) {
                 break;
             }
+            time_internal = 0;
         }
         if (IsElevatorSensorActive(kEndLimit)) {
             break;
@@ -258,6 +295,9 @@ uint8_t OpenDispenser(uint8_t rele, uint8_t turn_off_elevator) {
     }
     SetDispenserOn(false);
     close_dispenser_ = true;
+    if (time >= timeout || time_internal >= timeout_internal) {
+        return false;
+    }
     return true;
 }
 

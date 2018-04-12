@@ -78,6 +78,34 @@ uint8_t HandleSetValues(const Variable *var) {
             SendRun(var);
             known = ReturnElevatorToTop(var->value_.Byte_4);
             break;
+        case kAddressTestActuateDoubleAt:
+            SendRun(var);
+            known = ActuateDoubleAt(var->value_.Byte_4, var->value_.Byte_3, var->value_.Byte_2);
+            break;
+        case kAddressTestActuateSingleAt:
+            SendRun(var);
+            known = ActuateSingleAt(var->value_.Byte_4, var->value_.Byte_3);
+            break;
+        case kAddressTestAlignActuators:
+            SendRun(var);
+            known = AlignActuators();
+            break;
+        case kAddressTestCloseDispenser:
+            SendRun(var);
+            known = CloseDispenser();
+            break;
+        case kAddressTestDownToLine:
+            SendRun(var);
+            known = DownToLine(var->value_.Byte_4, var->value_.Byte_3, var->value_.Byte_1);
+            break;
+        case kAddressTestOpenDispenser:
+            SendRun(var);
+            known = OpenDispenser(var->value_.Byte_4, var->value_.Byte_3);
+            break;
+        case kAddressTestReturnElevator:
+            SendRun(var);
+            known = ReturnElevatorToTop(var->value_.Byte_4);
+            break;
         case kAddressReset:
             __asm__ volatile ("reset");
             known = true;

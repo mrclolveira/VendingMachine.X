@@ -51,6 +51,7 @@ typedef union {
 
 #define kAddressPresenceSensor 0x10
 #define kAddressDispenserSensor 0x11
+
 #define kAddressRGB 0x20
 #define kAddressDoorLock 0x21
 #define kAddressAlignActuators 0x22
@@ -58,7 +59,18 @@ typedef union {
 #define kAddressDoubleActuator 0x24
 #define kAddressSendPresenceStatus 0x25
 #define kAddressReturnElevator 0x26
-#define kAddressReset 0x27
+
+#define kAddressTestReturnElevator 0x30
+#define kAddressTestDownToLine 0x31
+#define kAddressTestActuateSingleAt 0x32
+#define kAddressTestActuateDoubleAt 0x33
+#define kAddressTestOpenDispenser 0x34
+#define kAddressTestCloseDispenser 0x35
+#define kAddressTestAlignActuators 0x36
+
+#define kAddressReset 0x40
+
+
 
 #endif	// DEFINITIONS_H
 

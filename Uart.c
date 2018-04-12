@@ -138,6 +138,7 @@ void __attribute__((__interrupt__, no_auto_psv )) _ISR _U1RXInterrupt (void) {
         timeout = 0;
     }
 
+    // this is just temporary
     if (incoming_msg.bytes[0] == 0x01) {
         ReturnElevatorToTop(true);
     } else if (incoming_msg.bytes[0] == 0x02) {
