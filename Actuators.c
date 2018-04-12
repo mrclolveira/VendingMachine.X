@@ -13,6 +13,7 @@
 #define ActuatorLine2(x) LATFbits.LATF1 = x
 #define ActuatorLine3(x) LATGbits.LATG1 = x
 #define ActuatorLine4(x) LATGbits.LATG0 = x
+#define ActuatorLine5(x) LATAbits.LATA6 = x
 
 #define ActuatorColumn0(x) LATDbits.LATD1 = x
 #define ActuatorColumn1(x) LATDbits.LATD2 = x
@@ -40,6 +41,8 @@ void ActuatorsInit(void) {
     TRISFbits.TRISF1 = 0;
     TRISGbits.TRISG1 = 0;
     TRISGbits.TRISG0 = 0;
+    TRISAbits.TRISA6 = 0;
+    ANSAbits.ANSA6 = 0;
     SetLineMotorOn(0xFF, false);
 
     TRISDbits.TRISD1 = 0;
@@ -101,6 +104,7 @@ void SetLineMotorOn(const uint8_t line, uint8_t on) {
             ActuatorLine2(true);
             ActuatorLine3(true);
             ActuatorLine4(true);
+            ActuatorLine5(true);
             break;
     }
 }

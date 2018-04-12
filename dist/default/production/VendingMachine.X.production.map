@@ -114,12 +114,12 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0xef8          0x1674  (5748)
 .const                      0x10f8                 0xe            0x15  (21)
-.text                       0x1106              0x1068          0x189c  (6300)
-.dinit                      0x216e                0x3e            0x5d  (93)
-.text                       0x21ac                0x26            0x39  (57)
-.init.delay32               0x21d2                0x1c            0x2a  (42)
+.text                       0x1106              0x106e          0x18a5  (6309)
+.dinit                      0x2174                0x3e            0x5d  (93)
+.text                       0x21b2                0x26            0x39  (57)
+.init.delay32               0x21d8                0x1c            0x2a  (42)
 
-                 Total program memory used (bytes):         0x2fe5  (12261) 4%
+                 Total program memory used (bytes):         0x2fee  (12270) 4%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -220,29 +220,29 @@ External Symbols in Program Memory (by address):
                   0x00191c                  _SendNack
                   0x001942                  _SendUnknownAddress
                   0x001968                  _ActuatorsInit
-                  0x0019b4                  _SetLineMotorOn
-                  0x001a68                  _SetColumnMotorOn
-                  0x001b5e                  _SetLockOn
-                  0x001b78                  _SetDispenserOn
-                  0x001b94                  _SetElevatorOn
-                  0x001bde                  _SensorsInit
-                  0x001c18                  _SetOnSensor
-                  0x001d0c                  _IsSensorLineActive
-                  0x001daa                  _IsDispenserOpen
-                  0x001dbe                  _IsPresenceSensorActive
-                  0x001dd2                  _IsElevatorSensorActive
-                  0x001e10                  _Handle
-                  0x001e44                  _HandleGetValues
-                  0x001e80                  _HandleSetValues
-                  0x001fd0                  _SendPresenceStatus
-                  0x001fee                  _SendDispenserClosed
-                  0x00200c                  _RGBInit
-                  0x0020be                  _SetRGB
-                  0x002118                  _Setup
-                  0x00213e                  _main
-                  0x0021ac                  _LEDInit
-                  0x0021b6                  _SetLedOn
-                  0x0021d2                  ___delay32
+                  0x0019b8                  _SetLineMotorOn
+                  0x001a6e                  _SetColumnMotorOn
+                  0x001b64                  _SetLockOn
+                  0x001b7e                  _SetDispenserOn
+                  0x001b9a                  _SetElevatorOn
+                  0x001be4                  _SensorsInit
+                  0x001c1e                  _SetOnSensor
+                  0x001d12                  _IsSensorLineActive
+                  0x001db0                  _IsDispenserOpen
+                  0x001dc4                  _IsPresenceSensorActive
+                  0x001dd8                  _IsElevatorSensorActive
+                  0x001e16                  _Handle
+                  0x001e4a                  _HandleGetValues
+                  0x001e86                  _HandleSetValues
+                  0x001fd6                  _SendPresenceStatus
+                  0x001ff4                  _SendDispenserClosed
+                  0x002012                  _RGBInit
+                  0x0020c4                  _SetRGB
+                  0x00211e                  _Setup
+                  0x002144                  _main
+                  0x0021b2                  _LEDInit
+                  0x0021bc                  _SetLedOn
+                  0x0021d8                  ___delay32
 
 External Symbols in Program Memory (by name):
 
@@ -254,34 +254,34 @@ External Symbols in Program Memory (by name):
                   0x00166c                  _CloseDispenser
                   0x001258                  _DoubleActuator
                   0x001328                  _DownToLine
-                  0x001e10                  _Handle
-                  0x001e44                  _HandleGetValues
-                  0x001e80                  _HandleSetValues
+                  0x001e16                  _Handle
+                  0x001e4a                  _HandleGetValues
+                  0x001e86                  _HandleSetValues
                   0x001106                  _InitLedThread
-                  0x001daa                  _IsDispenserOpen
-                  0x001dd2                  _IsElevatorSensorActive
-                  0x001dbe                  _IsPresenceSensorActive
-                  0x001d0c                  _IsSensorLineActive
-                  0x0021ac                  _LEDInit
+                  0x001db0                  _IsDispenserOpen
+                  0x001dd8                  _IsElevatorSensorActive
+                  0x001dc4                  _IsPresenceSensorActive
+                  0x001d12                  _IsSensorLineActive
+                  0x0021b2                  _LEDInit
                   0x00155e                  _OpenDispenser
-                  0x00200c                  _RGBInit
+                  0x002012                  _RGBInit
                   0x0012e4                  _ReturnElevatorToTop
                   0x0018c4                  _SendAck
-                  0x001fee                  _SendDispenserClosed
+                  0x001ff4                  _SendDispenserClosed
                   0x00191c                  _SendNack
-                  0x001fd0                  _SendPresenceStatus
+                  0x001fd6                  _SendPresenceStatus
                   0x0018f0                  _SendRun
                   0x001942                  _SendUnknownAddress
-                  0x001bde                  _SensorsInit
-                  0x001a68                  _SetColumnMotorOn
-                  0x001b78                  _SetDispenserOn
-                  0x001b94                  _SetElevatorOn
-                  0x0021b6                  _SetLedOn
-                  0x0019b4                  _SetLineMotorOn
-                  0x001b5e                  _SetLockOn
-                  0x001c18                  _SetOnSensor
-                  0x0020be                  _SetRGB
-                  0x002118                  _Setup
+                  0x001be4                  _SensorsInit
+                  0x001a6e                  _SetColumnMotorOn
+                  0x001b7e                  _SetDispenserOn
+                  0x001b9a                  _SetElevatorOn
+                  0x0021bc                  _SetLedOn
+                  0x0019b8                  _SetLineMotorOn
+                  0x001b64                  _SetLockOn
+                  0x001c1e                  _SetOnSensor
+                  0x0020c4                  _SetRGB
+                  0x00211e                  _Setup
                   0x0011d0                  _SingleActuator
                   0x00177c                  _UartInit
                   0x0017de                  _UartWrite
@@ -297,7 +297,7 @@ External Symbols in Program Memory (by name):
                   0x000c2e                  __Vacopy
                   0x00092c                  ___Printf_cdnopuxX
                   0x000c32                  ___Putfld_cdnopuxX
-                  0x0021d2                  ___delay32
+                  0x0021d8                  ___delay32
                   0x0006d4                  ___divdi3
                   0x0010b4                  ___divsi3
                   0x0004c0                  ___fixunssfsi
@@ -323,7 +323,7 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x00090e                  __sprintf_cdnopuxX
-                  0x00213e                  _main
+                  0x002144                  _main
                   0x000a90                  _memcpy
                   0x000a9e                  _strchr
                   0x000900                  sprintf_cdnopuxX.DAeo:_prout
@@ -497,16 +497,16 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x6b49
+.debug_info       0x000000       0x6be2
  *(.debug_info)
- .debug_info      0x000000       0x10ce build/default/production/Actuators.o
- .debug_info      0x0010ce        0x3a2 build/default/production/LED.o
- .debug_info      0x001470       0x1253 build/default/production/RGB.o
- .debug_info      0x0026c3       0x1b2a build/default/production/Sensors.o
- .debug_info      0x0041ed        0xeb6 build/default/production/Task.o
- .debug_info      0x0050a3       0x12c8 build/default/production/Uart.o
- .debug_info      0x00636b        0x43b build/default/production/ProtocollHandler.o
- .debug_info      0x0067a6        0x3a3 build/default/production/main.o
+ .debug_info      0x000000       0x1167 build/default/production/Actuators.o
+ .debug_info      0x001167        0x3a2 build/default/production/LED.o
+ .debug_info      0x001509       0x1253 build/default/production/RGB.o
+ .debug_info      0x00275c       0x1b2a build/default/production/Sensors.o
+ .debug_info      0x004286        0xeb6 build/default/production/Task.o
+ .debug_info      0x00513c       0x12c8 build/default/production/Uart.o
+ .debug_info      0x006404        0x43b build/default/production/ProtocollHandler.o
+ .debug_info      0x00683f        0x3a3 build/default/production/main.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x900
@@ -520,16 +520,16 @@ __CONFIG1
  .debug_abbrev    0x000746         0xe8 build/default/production/ProtocollHandler.o
  .debug_abbrev    0x00082e         0xd2 build/default/production/main.o
 
-.debug_line       0x000000        0xaf4
+.debug_line       0x000000        0xaf7
  *(.debug_line)
- .debug_line      0x000000        0x177 build/default/production/Actuators.o
- .debug_line      0x000177         0xec build/default/production/LED.o
- .debug_line      0x000263        0x10c build/default/production/RGB.o
- .debug_line      0x00036f        0x16d build/default/production/Sensors.o
- .debug_line      0x0004dc        0x23b build/default/production/Task.o
- .debug_line      0x000717        0x1a5 build/default/production/Uart.o
- .debug_line      0x0008bc        0x118 build/default/production/ProtocollHandler.o
- .debug_line      0x0009d4        0x120 build/default/production/main.o
+ .debug_line      0x000000        0x17a build/default/production/Actuators.o
+ .debug_line      0x00017a         0xec build/default/production/LED.o
+ .debug_line      0x000266        0x10c build/default/production/RGB.o
+ .debug_line      0x000372        0x16d build/default/production/Sensors.o
+ .debug_line      0x0004df        0x23b build/default/production/Task.o
+ .debug_line      0x00071a        0x1a5 build/default/production/Uart.o
+ .debug_line      0x0008bf        0x118 build/default/production/ProtocollHandler.o
+ .debug_line      0x0009d7        0x120 build/default/production/main.o
 
 .debug_frame      0x000000        0x608
  *(.debug_frame)
@@ -542,16 +542,16 @@ __CONFIG1
  .debug_frame     0x00051c         0xa0 build/default/production/ProtocollHandler.o
  .debug_frame     0x0005bc         0x4c build/default/production/main.o
 
-.debug_str        0x000000        0x397
+.debug_str        0x000000        0x3a0
  *(.debug_str)
- .debug_str       0x000000         0x72 build/default/production/Actuators.o
- .debug_str       0x000072         0x13 build/default/production/LED.o
- .debug_str       0x000085        0x125 build/default/production/RGB.o
- .debug_str       0x0001aa         0xc8 build/default/production/Sensors.o
- .debug_str       0x000272         0x91 build/default/production/Task.o
- .debug_str       0x000303         0x4e build/default/production/Uart.o
- .debug_str       0x000351         0x16 build/default/production/ProtocollHandler.o
- .debug_str       0x000367         0x30 build/default/production/main.o
+ .debug_str       0x000000         0x7b build/default/production/Actuators.o
+ .debug_str       0x00007b         0x13 build/default/production/LED.o
+ .debug_str       0x00008e        0x125 build/default/production/RGB.o
+ .debug_str       0x0001b3         0xc8 build/default/production/Sensors.o
+ .debug_str       0x00027b         0x91 build/default/production/Task.o
+ .debug_str       0x00030c         0x4e build/default/production/Uart.o
+ .debug_str       0x00035a         0x16 build/default/production/ProtocollHandler.o
+ .debug_str       0x000370         0x30 build/default/production/main.o
 
 .debug_loc
  *(.debug_loc)
@@ -1802,92 +1802,92 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x0000c0        0x98a
+                  0x0000c0        0x9a7
  .debug_pubtypes
-                  0x0000c0        0x1b7 build/default/production/Actuators.o
+                  0x0000c0        0x1d4 build/default/production/Actuators.o
  .debug_pubtypes
-                  0x000277         0x67 build/default/production/LED.o
+                  0x000294         0x67 build/default/production/LED.o
  .debug_pubtypes
-                  0x0002de        0x15e build/default/production/RGB.o
+                  0x0002fb        0x15e build/default/production/RGB.o
  .debug_pubtypes
-                  0x00043c        0x2bf build/default/production/Sensors.o
+                  0x000459        0x2bf build/default/production/Sensors.o
  .debug_pubtypes
-                  0x0006fb        0x141 build/default/production/Task.o
+                  0x000718        0x141 build/default/production/Task.o
  .debug_pubtypes
-                  0x00083c        0x15d build/default/production/Uart.o
+                  0x000859        0x15d build/default/production/Uart.o
  .debug_pubtypes
-                  0x000999         0x69 build/default/production/ProtocollHandler.o
+                  0x0009b6         0x69 build/default/production/ProtocollHandler.o
  .debug_pubtypes
-                  0x000a02         0x48 build/default/production/main.o
+                  0x000a1f         0x48 build/default/production/main.o
 
 __c30_signature
-                  0x000a4a         0xc6
+                  0x000a67         0xc6
  __c30_signature
-                  0x000a4a          0x6 build/default/production/Actuators.o
+                  0x000a67          0x6 build/default/production/Actuators.o
  __c30_signature
-                  0x000a50          0x6 build/default/production/LED.o
+                  0x000a6d          0x6 build/default/production/LED.o
  __c30_signature
-                  0x000a56          0x6 build/default/production/RGB.o
+                  0x000a73          0x6 build/default/production/RGB.o
  __c30_signature
-                  0x000a5c          0x6 build/default/production/Sensors.o
+                  0x000a79          0x6 build/default/production/Sensors.o
  __c30_signature
-                  0x000a62          0x6 build/default/production/Task.o
+                  0x000a7f          0x6 build/default/production/Task.o
  __c30_signature
-                  0x000a68          0x6 build/default/production/Uart.o
+                  0x000a85          0x6 build/default/production/Uart.o
  __c30_signature
-                  0x000a6e          0x6 build/default/production/ProtocollHandler.o
+                  0x000a8b          0x6 build/default/production/ProtocollHandler.o
  __c30_signature
-                  0x000a74          0x6 build/default/production/main.o
+                  0x000a91          0x6 build/default/production/main.o
  __c30_signature
-                  0x000a7a          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(crt0_extended24.o)
+                  0x000a97          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(crt0_extended24.o)
  __c30_signature
-                  0x000a80          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(data_init_24.o)
+                  0x000a9d          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(data_init_24.o)
  __c30_signature
-                  0x000a86          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(delay32da.Leo)
+                  0x000aa3          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(delay32da.Leo)
  __c30_signature
-                  0x000a8c          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(fixunssfsi.daeo)
+                  0x000aa9          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(fixunssfsi.daeo)
  __c30_signature
-                  0x000a92          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(floatunsisf.daeo)
+                  0x000aaf          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(floatunsisf.daeo)
  __c30_signature
-                  0x000a98          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(funpack.daeo)
+                  0x000ab5          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(funpack.daeo)
  __c30_signature
-                  0x000a9e          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(mulsf3.daeo)
+                  0x000abb          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(mulsf3.daeo)
  __c30_signature
-                  0x000aa4          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(divmoddi3.daeo)
+                  0x000ac1          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(divmoddi3.daeo)
  __c30_signature
-                  0x000aaa          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(muldi3.daeo)
+                  0x000ac7          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(muldi3.daeo)
  __c30_signature
-                  0x000ab0          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(floatundisf.daeo)
+                  0x000acd          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(floatundisf.daeo)
  __c30_signature
-                  0x000ab6          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(fpack.daeo)
+                  0x000ad3          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(fpack.daeo)
  __c30_signature
-                  0x000abc          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(funpack2.daeo)
+                  0x000ad9          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(funpack2.daeo)
  __c30_signature
-                  0x000ac2          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(futil.daeo)
+                  0x000adf          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(futil.daeo)
  __c30_signature
-                  0x000ac8          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(umuldi3.daeo)
+                  0x000ae5          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(umuldi3.daeo)
  __c30_signature
-                  0x000ace          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(sprintf_cdnopuxX.DAeo)
+                  0x000aeb          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(sprintf_cdnopuxX.DAeo)
  __c30_signature
-                  0x000ad4          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xprintf_cdnopuxX.DAeo)
+                  0x000af1          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xprintf_cdnopuxX.DAeo)
  __c30_signature
-                  0x000ada          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(memcpy.DA_eo)
+                  0x000af7          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(memcpy.DA_eo)
  __c30_signature
-                  0x000ae0          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(strchr.DA_eo)
+                  0x000afd          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(strchr.DA_eo)
  __c30_signature
-                  0x000ae6          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xputtxt.DA_eo)
+                  0x000b03          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xputtxt.DA_eo)
  __c30_signature
-                  0x000aec          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xvacopy.DA_eo)
+                  0x000b09          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xvacopy.DA_eo)
  __c30_signature
-                  0x000af2          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xputfld_cdnopuxX.DAeo)
+                  0x000b0f          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xputfld_cdnopuxX.DAeo)
  __c30_signature
-                  0x000af8          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xlitob.DA_eo)
+                  0x000b15          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-c-elf.a(xlitob.DA_eo)
  __c30_signature
-                  0x000afe          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(divsi3.daeo)
+                  0x000b1b          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(divsi3.daeo)
  __c30_signature
-                  0x000b04          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(udivsi3.daeo)
+                  0x000b21          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(udivsi3.daeo)
  __c30_signature
-                  0x000b0a          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(umodsi3.daeo)
+                  0x000b27          0x6 c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\libm-elf.a(umodsi3.daeo)
 
 .nbss               0x0800          0x2
  .nbss              0x0800          0x2 build/default/production/main.o
@@ -1921,7 +1921,7 @@ __c30_signature
 .const              0x90f8          0xe load address 0x0010f8  
  .const             0x90f8          0xe build/default/production/Uart.o
 
-.text             0x001106       0x1068
+.text             0x001106       0x106e
  .text            0x001106        0x5bc build/default/production/Task.o
                   0x001106                  _InitLedThread
                   0x001150                  _UnlockDoor
@@ -1945,41 +1945,41 @@ __c30_signature
                   0x0018f0                  _SendRun
                   0x00191c                  _SendNack
                   0x001942                  _SendUnknownAddress
- .text            0x001968        0x276 build/default/production/Actuators.o
+ .text            0x001968        0x27c build/default/production/Actuators.o
                   0x001968                  _ActuatorsInit
-                  0x0019b4                  _SetLineMotorOn
-                  0x001a68                  _SetColumnMotorOn
-                  0x001b5e                  _SetLockOn
-                  0x001b78                  _SetDispenserOn
-                  0x001b94                  _SetElevatorOn
- .text            0x001bde        0x232 build/default/production/Sensors.o
-                  0x001bde                  _SensorsInit
-                  0x001c18                  _SetOnSensor
-                  0x001d0c                  _IsSensorLineActive
-                  0x001daa                  _IsDispenserOpen
-                  0x001dbe                  _IsPresenceSensorActive
-                  0x001dd2                  _IsElevatorSensorActive
- .text            0x001e10        0x1fc build/default/production/ProtocollHandler.o
-                  0x001e10                  _Handle
-                  0x001e44                  _HandleGetValues
-                  0x001e80                  _HandleSetValues
-                  0x001fd0                  _SendPresenceStatus
-                  0x001fee                  _SendDispenserClosed
- .text            0x00200c        0x10c build/default/production/RGB.o
-                  0x00200c                  _RGBInit
-                  0x0020be                  _SetRGB
- .text            0x002118         0x56 build/default/production/main.o
-                  0x002118                  _Setup
-                  0x00213e                  _main
+                  0x0019b8                  _SetLineMotorOn
+                  0x001a6e                  _SetColumnMotorOn
+                  0x001b64                  _SetLockOn
+                  0x001b7e                  _SetDispenserOn
+                  0x001b9a                  _SetElevatorOn
+ .text            0x001be4        0x232 build/default/production/Sensors.o
+                  0x001be4                  _SensorsInit
+                  0x001c1e                  _SetOnSensor
+                  0x001d12                  _IsSensorLineActive
+                  0x001db0                  _IsDispenserOpen
+                  0x001dc4                  _IsPresenceSensorActive
+                  0x001dd8                  _IsElevatorSensorActive
+ .text            0x001e16        0x1fc build/default/production/ProtocollHandler.o
+                  0x001e16                  _Handle
+                  0x001e4a                  _HandleGetValues
+                  0x001e86                  _HandleSetValues
+                  0x001fd6                  _SendPresenceStatus
+                  0x001ff4                  _SendDispenserClosed
+ .text            0x002012        0x10c build/default/production/RGB.o
+                  0x002012                  _RGBInit
+                  0x0020c4                  _SetRGB
+ .text            0x00211e         0x56 build/default/production/main.o
+                  0x00211e                  _Setup
+                  0x002144                  _main
 
-.dinit            0x00216e         0x3e
- .dinit           0x00216e         0x3e data_init
+.dinit            0x002174         0x3e
+ .dinit           0x002174         0x3e data_init
 
-.text             0x0021ac         0x26
- .text            0x0021ac         0x26 build/default/production/LED.o
-                  0x0021ac                  _LEDInit
-                  0x0021b6                  _SetLedOn
+.text             0x0021b2         0x26
+ .text            0x0021b2         0x26 build/default/production/LED.o
+                  0x0021b2                  _LEDInit
+                  0x0021bc                  _SetLedOn
 
-.init.delay32     0x0021d2         0x1c
- .init.delay32    0x0021d2         0x1c c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(delay32da.Leo)
-                  0x0021d2                  ___delay32
+.init.delay32     0x0021d8         0x1c
+ .init.delay32    0x0021d8         0x1c c:/program files (x86)/microchip/xc16/v1.33/bin/bin/../../lib\liblega-pic30-elf.a(delay32da.Leo)
+                  0x0021d8                  ___delay32
