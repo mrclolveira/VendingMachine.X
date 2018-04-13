@@ -70,15 +70,15 @@ void Setup() {
     ANSF = 0;
     ANSG = 0;
 
+    RGBInit();
+    LEDInit();
+    SensorsInit();
+    ActuatorsInit();
     UartInit();
     UartWriteInt(RCON);
     RCON = 0;
-    SensorsInit();
-    ActuatorsInit();
-    LEDInit();
-    RGBInit();
 
-//    ReturnElevatorToTop();
+    ReturnElevatorToTop(true);
 }
 
 int main(void) {

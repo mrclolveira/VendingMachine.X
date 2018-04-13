@@ -138,31 +138,6 @@ void __attribute__((__interrupt__, no_auto_psv )) _ISR _U1RXInterrupt (void) {
         timeout = 0;
     }
 
-    // this is just temporary
-    if (incoming_msg.bytes[0] == 0x01) {
-        ReturnElevatorToTop(true);
-    } else if (incoming_msg.bytes[0] == 0x02) {
-        ReturnElevatorToTop(false);
-    } else if (incoming_msg.bytes[0] == 0x03) {
-        DownToLine(2, 4, true);
-    } else if (incoming_msg.bytes[0] == 0x04) {
-        DownToLine(0, 2, true);
-    } else if (incoming_msg.bytes[0] == 0x05) {
-        ActuateSingleAt(incoming_msg.bytes[1], incoming_msg.bytes[2]);
-    } else if (incoming_msg.bytes[0] == 0x06) {
-        ActuateDoubleAt(incoming_msg.bytes[1], incoming_msg.bytes[2], incoming_msg.bytes[3]);
-    } else if (incoming_msg.bytes[0] == 0x07) {
-        OpenDispenser(true, incoming_msg.bytes[1]);
-    } else if (incoming_msg.bytes[0] == 0x08) {
-        CloseDispenser();
-    } else if (incoming_msg.bytes[0] == 0x09) {
-        AlignActuators();
-    } else if (incoming_msg.bytes[0] == 0x0A) {
-        GoElevatorToDown(true);
-    } else if (incoming_msg.bytes[0] == 0x0B) {
-        GoElevatorToDown(false);
-    }
-
     if (incoming_msg.bytes[0] != kFixedPreamble) {
         error = true;
     }
