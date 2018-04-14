@@ -35,6 +35,8 @@
 #define ButtonDown PORTGbits.RG3
 
 void SensorsInit(void) {
+    U1CNFG2bits.UTRDIS = 1;
+
     TRISEbits.TRISE4 = 1;
     TRISGbits.TRISG15 = 1;
     TRISEbits.TRISE5 = 1;
@@ -67,6 +69,7 @@ void SensorsInit(void) {
     I2C2CONbits.I2CEN = 0;
     I2C3CONbits.I2CEN = 0;
     PMCON1bits.PMPEN = 0;
+
 }
 
 void SetOnSensor(const uint8_t column, uint8_t on) {
@@ -176,15 +179,13 @@ uint8_t IsElevatorSensorActive(const ElevatorSensors sensor) {
         } else {
             result = false;
         }
-    }
-    if (sensor == kEndLimit) {
+    } else if (sensor == kEndLimit) {
         if (SensorElevatorEndLimit == false) {
             result = true;
         } else {
             result = false;
         }
-    }
-    if (sensor == kEndLimitDown) {
+    } else if (sensor == kEndLimitDown) {
         if (SensorElevatorEndLimitDown == false) {
             result = true;
         } else {

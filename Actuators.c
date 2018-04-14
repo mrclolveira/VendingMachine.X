@@ -43,7 +43,7 @@ void ActuatorsInit(void) {
     TRISGbits.TRISG0 = 0;
     TRISAbits.TRISA6 = 0;
     ANSAbits.ANSA6 = 0;
-    SetLineMotorOn(0xFF, false);
+    SetLineMotorOn(0xFF, true);
 
     TRISDbits.TRISD1 = 0;
     TRISDbits.TRISD2 = 0;
@@ -79,24 +79,47 @@ void SetLineMotorOn(const uint8_t line, uint8_t on) {
     uint8_t on_invert = false;
     if (on == false) {
         on_invert = true;
-    } else {
-        on_invert = false;
     }
     switch (line) {
         case 0:
             ActuatorLine0(on_invert);
+            ActuatorLine1(true);
+            ActuatorLine2(true);
+            ActuatorLine3(true);
+            ActuatorLine4(true);
+            ActuatorLine5(true);
             break;
         case 1:
+            ActuatorLine0(true);
             ActuatorLine1(on_invert);
+            ActuatorLine2(true);
+            ActuatorLine3(true);
+            ActuatorLine4(true);
+            ActuatorLine5(true);
             break;
         case 2:
+            ActuatorLine0(true);
+            ActuatorLine1(true);
             ActuatorLine2(on_invert);
+            ActuatorLine3(true);
+            ActuatorLine4(true);
+            ActuatorLine5(true);
             break;
         case 3:
+            ActuatorLine0(true);
+            ActuatorLine1(true);
+            ActuatorLine2(true);
             ActuatorLine3(on_invert);
+            ActuatorLine4(true);
+            ActuatorLine5(true);
             break;
         case 4:
+            ActuatorLine0(true);
+            ActuatorLine1(true);
+            ActuatorLine2(true);
+            ActuatorLine3(true);
             ActuatorLine4(on_invert);
+            ActuatorLine5(true);
             break;
         default:
             ActuatorLine0(true);

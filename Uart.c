@@ -26,7 +26,7 @@ void UartInit(void) {
 
     U1MODE = 0x8080;
     U1STA = 0x9400;
-    U1BRG = 51;
+    U1BRG = 103;
 
     IFS0bits.U1RXIF = 0;
     IFS0bits.U1TXIF = 0;
@@ -136,6 +136,26 @@ void __attribute__((__interrupt__, no_auto_psv )) _ISR _U1RXInterrupt (void) {
             incoming_msg.bytes[i] = 0;
         }
         timeout = 0;
+    }
+
+    if (incoming_msg.bytes[0] == 0x01) {
+        ReturnElevatorToTop(true);
+    } else if (incoming_msg.bytes[0] == 0x02) {
+        GoElevatorToDown(false);
+    } else if (incoming_msg.bytes[0] == 0x03) {
+        DownToLine(2, 4, true);
+    } else if (incoming_msg.bytes[0] == 0x04) {
+        DownToLine(0, 4, true);
+    } else if (incoming_msg.bytes[0] == 0x05) {
+        ActuateSingleAt(incoming_msg.bytes[1], incoming_msg.bytes[2]);
+    } else if (incoming_msg.bytes[0] == 0x06) {
+        ActuateDoubleAt(incoming_msg.bytes[1], incoming_msg.bytes[2], incoming_msg.bytes[3]);
+    } else if (incoming_msg.bytes[0] == 0x07) {
+        OpenDispenser(true, incoming_msg.bytes[1]);
+    } else if (incoming_msg.bytes[0] == 0x08) {
+        CloseDispenser();
+    } else if (incoming_msg.bytes[0] == 0x09) {
+        AlignActuators();
     }
 
     if (incoming_msg.bytes[0] != kFixedPreamble) {
