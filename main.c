@@ -11,7 +11,6 @@
 
 // 'C' source line config statements
 
-
 // CONFIG3
 #pragma config WPFP = WPFP255
 #pragma config SOSCSEL = LPSOSC
@@ -26,9 +25,9 @@
 #pragma config IOL1WAY = OFF
 #pragma config OSCIOFNC = OFF
 #pragma config FCKSM = CSECME
-#pragma config FNOSC = FRCPLL
+#pragma config FNOSC = PRIPLL
 #pragma config PLL96MHZ = ON
-#pragma config PLLDIV = DIV2
+#pragma config PLLDIV = DIV4
 #pragma config IESO = ON
 
 // CONFIG1
@@ -62,8 +61,6 @@ uint8_t close_dispenser_ = false;
 uint8_t send_presence_status_ = false;
 
 void Setup() {
-    CLKDIV = 0x0020;
-
     ANSA = 0;
     ANSB = 0;
     ANSC = 0;
@@ -73,9 +70,9 @@ void Setup() {
     ANSG = 0;
 
     RGBInit();
-    LEDInit();
     SensorsInit();
     ActuatorsInit();
+    LEDInit();
     UartInit();
     RCON = 0;
 

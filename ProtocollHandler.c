@@ -76,7 +76,7 @@ uint8_t HandleSetValues(const Variable *var) {
             break;
         case kAddressReturnElevator:
             SendRun(var);
-            known = ReturnElevatorToTop(var->value_.Byte_4);
+            known = ReturnElevatorToTop(true);
             break;
         case kAddressTestActuateDoubleAt:
             SendRun(var);
@@ -96,15 +96,19 @@ uint8_t HandleSetValues(const Variable *var) {
             break;
         case kAddressTestDownToLine:
             SendRun(var);
-            known = DownToLine(var->value_.Byte_4, var->value_.Byte_3, var->value_.Byte_1);
+            known = DownToLine(var->value_.Byte_4, var->value_.Byte_3, true);
             break;
         case kAddressTestOpenDispenser:
             SendRun(var);
-            known = OpenDispenser(var->value_.Byte_4, var->value_.Byte_3);
+            known = OpenDispenser(true, true);
+            break;
+        case kAddressTestDownEleavtor:
+            SendRun(var);
+            known = GoElevatorToDown(true);
             break;
         case kAddressTestReturnElevator:
             SendRun(var);
-            known = ReturnElevatorToTop(var->value_.Byte_4);
+            known = ReturnElevatorToTop(true);
             break;
         case kAddressReset:
             __asm__ volatile ("reset");

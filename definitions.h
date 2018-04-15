@@ -61,12 +61,13 @@ typedef union {
 #define kAddressReturnElevator 0x26
 
 #define kAddressTestReturnElevator 0x30
-#define kAddressTestDownToLine 0x31
-#define kAddressTestActuateSingleAt 0x32
-#define kAddressTestActuateDoubleAt 0x33
-#define kAddressTestOpenDispenser 0x34
-#define kAddressTestCloseDispenser 0x35
-#define kAddressTestAlignActuators 0x36
+#define kAddressTestDownEleavtor 0x31
+#define kAddressTestDownToLine 0x32
+#define kAddressTestActuateSingleAt 0x33
+#define kAddressTestActuateDoubleAt 0x34
+#define kAddressTestOpenDispenser 0x35
+#define kAddressTestCloseDispenser 0x36
+#define kAddressTestAlignActuators 0x37
 
 #define kAddressReset 0x40
 

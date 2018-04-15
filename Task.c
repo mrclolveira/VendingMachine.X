@@ -64,10 +64,10 @@ uint8_t AlignActuators() {
 }
 
 uint8_t SingleActuator(const Payload *value) {
-    if (ReturnElevatorToTop(value->Byte_1) == false) {
+    if (ReturnElevatorToTop(true) == false) {
         return false;
     }
-    if (DownToLine(value->Byte_4, kLimitTopLIne, value->Byte_1) == false) {
+    if (DownToLine(value->Byte_4, kLimitTopLIne, true) == false) {
         return false;
     }
     __delay_ms(500);
@@ -75,24 +75,24 @@ uint8_t SingleActuator(const Payload *value) {
         return false;
     }
     __delay_ms(2000);
-    if (GoElevatorToDown(value->Byte_1) == false) {
+    if (GoElevatorToDown(true) == false) {
         return false;
     }
     __delay_ms(2000);
-    if (OpenDispenser(value->Byte_1, false) == false) {
+    if (OpenDispenser(true, false) == false) {
         return false;
     }
-    if (ReturnElevatorToTop(value->Byte_1) == false) {
+    if (ReturnElevatorToTop(true) == false) {
         return false;
     }
     return true;
 }
 
 uint8_t DoubleActuator(const Payload *value) {
-    if (ReturnElevatorToTop(value->Byte_1) == false) {
+    if (ReturnElevatorToTop(true) == false) {
         return false;
     }
-    if (DownToLine(value->Byte_4, kLimitTopLIne, value->Byte_1) == false) {
+    if (DownToLine(value->Byte_4, kLimitTopLIne, true) == false) {
         return false;
     }
     __delay_ms(500);
@@ -100,14 +100,14 @@ uint8_t DoubleActuator(const Payload *value) {
         return false;
     }
     __delay_ms(2000);
-    if (GoElevatorToDown(value->Byte_1) == false) {
+    if (GoElevatorToDown(true) == false) {
         return false;
     }
     __delay_ms(2000);
-    if (OpenDispenser(value->Byte_1, false) == false) {
+    if (OpenDispenser(true, false) == false) {
         return false;
     }
-    if (ReturnElevatorToTop(value->Byte_1) == false) {
+    if (ReturnElevatorToTop(true) == false) {
         return false;
     }
     return true;

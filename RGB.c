@@ -7,8 +7,16 @@
 
 #include "RGB.h"
 #include "Uart.h"
+#include "Uart.h"
 
 void RGBInit(void) {
+    TRISBbits.TRISB6 = 0;
+    ANSGbits.ANSG6 = 0;
+    TRISGbits.TRISG7 = 0;
+    ANSGbits.ANSG7 = 0;
+    TRISGbits.TRISG8 = 0;
+    ANSGbits.ANSG8 = 0;
+
     __builtin_write_OSCCONL(OSCCON & 0xbf);
     RPOR10bits.RP21R = 18;
     RPOR13bits.RP26R = 19;
@@ -16,7 +24,7 @@ void RGBInit(void) {
     __builtin_write_OSCCONL(OSCCON | 0x40);
 
     OC1R = 0x00FF;
-    OC1RS = 0x0FFF;
+    OC1RS = 0x0FFF - 1;
     OC1CON2bits.SYNCSEL = 0x1F;
     OC1CON2bits.OCTRIG = 0;
     OC1CON2bits.OCINV = 1;
@@ -24,7 +32,7 @@ void RGBInit(void) {
     OC1CON1bits.OCM = 0b110;
 
     OC2R = 0x00FF;
-    OC2RS = 0x0FFF;
+    OC2RS = 0x0FFF - 1;
     OC2CON2bits.SYNCSEL = 0x1F;
     OC2CON2bits.OCTRIG = 0;
     OC2CON2bits.OCINV = 1;
@@ -32,7 +40,7 @@ void RGBInit(void) {
     OC2CON1bits.OCM = 0b110;
 
     OC3R = 0x00FF;
-    OC3RS = 0x0FFF;
+    OC3RS = 0x0FFF - 1;
     OC3CON2bits.SYNCSEL = 0x1F;
     OC3CON2bits.OCTRIG = 0;
     OC3CON2bits.OCINV = 1;
