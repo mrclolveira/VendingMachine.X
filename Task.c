@@ -304,11 +304,12 @@ uint8_t OpenDispenser(uint8_t rele, uint8_t turn_off_elevator) {
         SetElevatorOn(kStoped, rele);
     }
 
-    timeout = 0;
+    time = 0;
     SetDispenserOn(true);
-    while (IsDispenserOpen() == true && (++time<timeout)) {
+    while (IsDispenserOpen() == false && (++time<timeout)) {
         __delay_ms(1);
     }
+
     SetDispenserOn(false);
     close_dispenser_ = true;
     if (time >= timeout || time_internal >= timeout_internal) {

@@ -27,7 +27,7 @@ void RGBInit(void) {
     OC1RS = 0x0FFF - 1;
     OC1CON2bits.SYNCSEL = 0x1F;
     OC1CON2bits.OCTRIG = 0;
-    OC1CON2bits.OCINV = 1;
+    OC1CON2bits.OCINV = 0;
     OC1CON1bits.OCTSEL = 0b111;
     OC1CON1bits.OCM = 0b110;
 
@@ -35,7 +35,7 @@ void RGBInit(void) {
     OC2RS = 0x0FFF - 1;
     OC2CON2bits.SYNCSEL = 0x1F;
     OC2CON2bits.OCTRIG = 0;
-    OC2CON2bits.OCINV = 1;
+    OC2CON2bits.OCINV = 0;
     OC2CON1bits.OCTSEL = 0b111;
     OC2CON1bits.OCM = 0b110;
 
@@ -43,7 +43,7 @@ void RGBInit(void) {
     OC3RS = 0x0FFF - 1;
     OC3CON2bits.SYNCSEL = 0x1F;
     OC3CON2bits.OCTRIG = 0;
-    OC3CON2bits.OCINV = 1;
+    OC3CON2bits.OCINV = 0;
     OC3CON1bits.OCTSEL = 0b111;
     OC3CON1bits.OCM = 0b110;
 }
