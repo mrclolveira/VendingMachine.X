@@ -62,18 +62,19 @@ Endereço e valores:
 		Responde apenas a propriedade de SET;
 		byte 07 (0 - 4) referente a linha
 		byte 06 (0 - 7) referente a coluna
-		byte 05/04 = 0x00
+		byte 05 = 0x00
+		byte 04 = (1 - 60) Tempo para fechar o dispenser (em Segundos) 
 
 	Endereço Atuação Motor duplo = 0x24
 		Responde apenas a propriedade de SET;
 		byte 07 (0 - 4) referente a linha
 		byte 06 (0 - 7) referente a primeira coluna
 		byte 05 (0 - 7) referente a segunda coluna
-		byte 04 = 0x00;	
+		byte 04 = (1 - 60) Tempo para fechar o dispenser (em Segundos)	
 
 	Endereço ativa o Envio sensor de presensa a cada 500ms = 0x25
 		Responde apenas a propriedade de SET;
-		byte 07 = 0x01;
+		byte 07 = 0x01 / 0x00;
 		byte 06/05/04 = 0x00;
 	-------
 	Endereço teste para retorno do elevador = 0x30
@@ -101,6 +102,7 @@ Endereço e valores:
 		byte 07/06/05/04 = 0x00;
 
 	Endereço teste para fechamento do dispenser = 0x36
+		byte 07 (1 - 60) Tempo para fechar o dispenser (em Segundos) 
 		byte 07/06/05/04 = 0x00;
 
 	Endereço teste para alinhamento das molas = 0x37
