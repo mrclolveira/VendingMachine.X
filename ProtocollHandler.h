@@ -12,6 +12,4 @@ uint8_t HandleSetValues(const Variable *var);
 void SendPresenceStatus();
 void SendDispenserClosed();
 
-extern uint8_t send_presence_status_;
-
 #endif	// PROTOCOLLHANDLER_H

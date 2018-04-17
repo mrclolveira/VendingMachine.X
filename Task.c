@@ -11,6 +11,11 @@
 #include "Sensors.h"
 #include "LED.h"
 #include <libpic30.h>
+#include "ProtocollHandler.h"
+
+uint8_t close_dispenser_ = false;
+uint8_t send_presence_status_ = false;
+uint8_t time_to_close_dispenser_ = kDefaultTimeToClose;
 
 void InitLedThread(void) {
     __builtin_write_OSCCONL( 0x02 );
@@ -41,6 +46,36 @@ void __attribute__((__interrupt__, auto_psv )) _ISR _RTCCInterrupt(void) {
     IFS3bits.RTCIF = 0;
 }
 
+void MainTask(void) {
+    if (close_dispenser_) {
+        SendDispenserClosed();
+        CloseDispenser(time_to_close_dispenser_);
+    }
+
+    if (send_presence_status_) {
+        SendPresenceStatus();
+    }
+
+    if (IsButtonUpActive()) {
+        ReturnElevatorToTop(true);
+    }
+
+    if (IsButtonDownActive()) {
+        GoElevatorToDown(true);
+    }
+
+    SetLedOn(!LATFbits.LATF5);
+    __delay_ms(500);
+}
+
+uint8_t SetSendPresenceStatus(const Payload *value) {
+    if (value->Byte_4 == false || value->Byte_4 == true) {
+        send_presence_status_ = value->Byte_4;
+        return true;
+    }
+    return false;
+}
+
 void UnlockDoor(const Payload *value) {
     SetLockOn(true);
 
@@ -67,7 +102,7 @@ uint8_t SingleActuator(const Payload *value) {
     if (ReturnElevatorToTop(true) == false) {
         return false;
     }
-    if (DownToLine(value->Byte_4, kLimitTopLIne, true) == false) {
+    if (DownToLine(value->Byte_4, kLastLineOnTop, true) == false) {
         return false;
     }
     __delay_ms(500);
@@ -82,8 +117,10 @@ uint8_t SingleActuator(const Payload *value) {
     if (OpenDispenser(true, false) == false) {
         return false;
     }
-    if (ReturnElevatorToTop(true) == false) {
-        return false;
+    if (value->Byte_4 > 0) {
+        time_to_close_dispenser_ = value->Byte_4;
+    } else {
+        time_to_close_dispenser_ = kDefaultTimeToClose;
     }
     return true;
 }
@@ -92,7 +129,7 @@ uint8_t DoubleActuator(const Payload *value) {
     if (ReturnElevatorToTop(true) == false) {
         return false;
     }
-    if (DownToLine(value->Byte_4, kLimitTopLIne, true) == false) {
+    if (DownToLine(value->Byte_4, kLastLineOnTop, true) == false) {
         return false;
     }
     __delay_ms(500);
@@ -107,13 +144,19 @@ uint8_t DoubleActuator(const Payload *value) {
     if (OpenDispenser(true, false) == false) {
         return false;
     }
-    if (ReturnElevatorToTop(true) == false) {
-        return false;
+    if (value->Byte_4 > 0) {
+        time_to_close_dispenser_ = value->Byte_4;
+    } else {
+        time_to_close_dispenser_ = kDefaultTimeToClose;
     }
     return true;
 }
 
 uint8_t ReturnElevatorToTop(uint8_t rele) {
+    if (IsElevatorSensorActive(kEndLimit)) {
+        return true;
+    }
+
     uint16_t timeout = 30000;
     uint16_t time = 0;
     SetElevatorOn(kUp, rele);
@@ -130,6 +173,10 @@ uint8_t ReturnElevatorToTop(uint8_t rele) {
 }
 
 uint8_t GoElevatorToDown(uint8_t rele) {
+    if (IsElevatorSensorActive(kEndLimitDown)) {
+        return true;
+    }
+
     uint16_t timeout = 30000;
     uint16_t time = 0;
     SetElevatorOn(kDown, rele);
@@ -152,7 +199,7 @@ uint8_t DownToLine(const uint8_t line, uint8_t current_line, uint8_t rele) {
 
     uint16_t timeout = 30000;
     uint16_t time = 0;
-    uint16_t timeout_internal = 3000;
+    uint16_t timeout_internal = 3;
     uint16_t time_internal = 0;
 
     SetElevatorOn(kDown, rele);
@@ -167,7 +214,7 @@ uint8_t DownToLine(const uint8_t line, uint8_t current_line, uint8_t rele) {
             --current_line;
             if (current_line > line) {
                 while (IsElevatorSensorActive(kLevel) && (++time_internal<timeout_internal)) {
-                    __delay_ms(1);
+                    __delay_ms(1000);
                 }
             }
             if (time_internal > timeout_internal) {
@@ -318,22 +365,46 @@ uint8_t OpenDispenser(uint8_t rele, uint8_t turn_off_elevator) {
     return true;
 }
 
-uint8_t CloseDispenser(void) {
+uint8_t CloseDispenser(uint8_t time_to_close) {
     SetLedOn(true);
-    uint16_t timeout = 8000;
+    uint16_t timeout = (time_to_close * 1000);
     uint16_t time = 0;
+
+    uint8_t is_elevator_on_top = false;
+    SetElevatorOn(kUp, true);
+
     while (++time<timeout) {
         __delay_ms(1);
-    }
-    if (IsPresenceSensorActive()) {
-        timeout = 2000;
-        while (++time<timeout) {
-            __delay_ms(1);
+        if (IsElevatorSensorActive(kEndLimit) && is_elevator_on_top == false) {
+            SetElevatorOn(kStoped, true);
+            is_elevator_on_top = true;
         }
     }
+
+    if (IsPresenceSensorActive()) {
+        timeout += 2000;
+        while (++time < timeout) {
+            __delay_ms(1);
+            if (IsElevatorSensorActive(kEndLimit) && is_elevator_on_top == false) {
+                SetElevatorOn(kStoped, true);
+                is_elevator_on_top = true;
+            }
+        }
+    }
+
     SetDispenserOn(true);
     __delay_ms(500);
     SetDispenserOn(false);
+
+    if (is_elevator_on_top == false) {
+        time = 0;
+        timeout = 25000;
+        while (!IsElevatorSensorActive(kEndLimit) && (++time<timeout)) {
+            __delay_ms(1);
+        }
+        SetElevatorOn(kStoped, true);
+    }
+
     close_dispenser_ = false;
     SetLedOn(false);
     return true;

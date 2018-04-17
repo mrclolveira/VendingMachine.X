@@ -71,8 +71,7 @@ uint8_t HandleSetValues(const Variable *var) {
             known = DoubleActuator(&var->value_);
             break;
         case kAddressSendPresenceStatus:
-            send_presence_status_ = var->value_.Byte_4;
-            known = true;
+            known = SetSendPresenceStatus(&var->value_);
             break;
         case kAddressReturnElevator:
             SendRun(var);
@@ -92,7 +91,7 @@ uint8_t HandleSetValues(const Variable *var) {
             break;
         case kAddressTestCloseDispenser:
             SendRun(var);
-            known = CloseDispenser();
+            known = CloseDispenser(var->value_.Byte_4);
             break;
         case kAddressTestDownToLine:
             SendRun(var);

@@ -25,8 +25,8 @@
 #pragma config IOL1WAY = OFF
 #pragma config OSCIOFNC = OFF
 #pragma config FCKSM = CSECME
-#pragma config FNOSC = PRIPLL
-#pragma config PLL96MHZ = ON
+#pragma config FNOSC = PRI
+#pragma config PLL96MHZ = OFF
 #pragma config PLLDIV = DIV4
 #pragma config IESO = ON
 
@@ -57,9 +57,6 @@
 #include "RGB.h"
 #include "Task.h"
 
-uint8_t close_dispenser_ = false;
-uint8_t send_presence_status_ = false;
-
 void Setup() {
     ANSA = 0;
     ANSB = 0;
@@ -83,25 +80,7 @@ int main(void) {
     Setup();
 
     while(1) {
-        if (close_dispenser_) {
-            SendDispenserClosed();
-            CloseDispenser();
-        }
-
-        if (send_presence_status_) {
-            SendPresenceStatus();
-        }
-
-        if (IsButtonUpActive()) {
-            ReturnElevatorToTop(true);
-        }
-
-        if (IsButtonDownActive()) {
-            GoElevatorToDown(true);
-        }
-
-        SetLedOn(!LATFbits.LATF5);
-        __delay_ms(500);
+        MainTask();
     }
     return 0;
 }
