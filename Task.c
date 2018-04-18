@@ -12,6 +12,7 @@
 #include "LED.h"
 #include <libpic30.h>
 #include "ProtocollHandler.h"
+#include "Uart.h"
 
 uint8_t close_dispenser_ = false;
 uint8_t send_presence_status_ = false;
@@ -207,20 +208,28 @@ uint8_t DownToLine(const uint8_t line, uint8_t current_line, uint8_t rele) {
         __delay_ms(1);
     }
 
+    unsigned char str[1] = { current_line };
     time_internal = 0;
     while (current_line > line && (++time<timeout)) {
         __delay_ms(1);
         if (IsElevatorSensorActive(kLevel)) {
             --current_line;
+            UartWriteByte(str, 1);
             if (current_line > line) {
                 while (IsElevatorSensorActive(kLevel) && (++time_internal<timeout_internal)) {
                     __delay_ms(1000);
+                    if (IsElevatorSensorActive(kEndLimitDown)) {
+                        break;
+                    }
                 }
             }
             if (time_internal > timeout_internal) {
                 break;
             }
             time_internal = 0;
+        }
+        if (IsElevatorSensorActive(kEndLimitDown)) {
+            break;
         }
         if (time > timeout) {
             break;

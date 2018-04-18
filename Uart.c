@@ -30,7 +30,7 @@ void UartInit(void) {
 
     U1MODE = 0x8080;
     U1STA = 0x9400;
-    U1BRG = 103;
+    U1BRG = 25;
     uint8_t error = U1RXREG;
     error = 0;
 

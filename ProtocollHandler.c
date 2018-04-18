@@ -95,7 +95,7 @@ uint8_t HandleSetValues(const Variable *var) {
             break;
         case kAddressTestDownToLine:
             SendRun(var);
-            known = DownToLine(var->value_.Byte_4, var->value_.Byte_3, true);
+            known = DownToLine(var->value_.Byte_4, kLastLineOnTop, true);
             break;
         case kAddressTestOpenDispenser:
             SendRun(var);

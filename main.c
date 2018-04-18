@@ -23,11 +23,11 @@
 // CONFIG2
 #pragma config POSCMOD = HS
 #pragma config IOL1WAY = OFF
-#pragma config OSCIOFNC = OFF
+#pragma config OSCIOFNC = ON
 #pragma config FCKSM = CSECME
-#pragma config FNOSC = PRI
+#pragma config FNOSC = FRC
 #pragma config PLL96MHZ = OFF
-#pragma config PLLDIV = DIV4
+#pragma config PLLDIV = NODIV
 #pragma config IESO = ON
 
 // CONFIG1
@@ -58,6 +58,9 @@
 #include "Task.h"
 
 void Setup() {
+    CLKDIV = 0;
+    __delay_ms(2000);
+
     ANSA = 0;
     ANSB = 0;
     ANSC = 0;
