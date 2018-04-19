@@ -86,7 +86,8 @@ void SendAck(const Variable *var) {
 
     Integer crc;
     crc.integer = CRC_HW_calculate(ack.bytes, protocoll_size_ - 2);
-    ack.crc_ = crc;
+    ack.bytes[protocoll_size_ - 2] = crc.High;
+    ack.bytes[protocoll_size_ - 1] = crc.Low;
     UartWrite(&ack);
 }
 
@@ -98,7 +99,8 @@ void SendRun(const Variable *var) {
 
     Integer crc;
     crc.integer = CRC_HW_calculate(run.bytes, protocoll_size_ - 2);
-    run.crc_ = crc;
+    run.bytes[protocoll_size_ - 2] = crc.High;
+    run.bytes[protocoll_size_ - 1] = crc.Low;
     UartWrite(&run);
 }
 
