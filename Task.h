@@ -9,6 +9,8 @@
 #define kLastLineOnTop 4
 #define kLimitBottomLine 0
 #define kDefaultTimeToClose 8
+#define kNumberOfLines 5
+#define kNumberOfColumns 7
 
 void InitLedThread(void);
 void __attribute__((__interrupt__, auto_psv )) _ISR _RTCCInterrupt(void);

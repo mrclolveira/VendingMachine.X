@@ -89,8 +89,8 @@ void UnlockDoor(const Payload *value) {
 
 uint8_t AlignActuators() {
     int line, column;
-    for (line = 0; line < 5; line++) {
-        for (column = 0; column < 5; column++) {
+    for (line = 0; line < kNumberOfLines; line++) {
+        for (column = 0; column < kNumberOfColumns; column++) {
             if (!ActuateSingleAt(line, column)) {
                 return false;
             }
@@ -100,6 +100,10 @@ uint8_t AlignActuators() {
 }
 
 uint8_t SingleActuator(const Payload *value) {
+    if (value->Byte_4 >= kNumberOfLines || value->Byte_3 >= kNumberOfColumns) {
+        return false;
+    }
+
     if (ReturnElevatorToTop(true) == false) {
         return false;
     }
@@ -127,6 +131,10 @@ uint8_t SingleActuator(const Payload *value) {
 }
 
 uint8_t DoubleActuator(const Payload *value) {
+    if (value->Byte_4 >= kNumberOfLines || value->Byte_3 >= kNumberOfColumns || value->Byte_2 >= kNumberOfColumns) {
+        return false;
+    }
+
     if (ReturnElevatorToTop(true) == false) {
         return false;
     }
@@ -200,7 +208,7 @@ uint8_t DownToLine(const uint8_t line, uint8_t current_line, uint8_t rele) {
 
     uint16_t timeout = 30000;
     uint16_t time = 0;
-    uint16_t timeout_internal = 3;
+    uint16_t timeout_internal = 1500;
     uint16_t time_internal = 0;
 
     SetElevatorOn(kDown, rele);
@@ -208,13 +216,12 @@ uint8_t DownToLine(const uint8_t line, uint8_t current_line, uint8_t rele) {
         __delay_ms(1);
     }
 
-    unsigned char str[1] = { current_line };
     time_internal = 0;
+    timeout_internal = 3;
     while (current_line > line && (++time<timeout)) {
         __delay_ms(1);
         if (IsElevatorSensorActive(kLevel)) {
             --current_line;
-            UartWriteByte(str, 1);
             if (current_line > line) {
                 while (IsElevatorSensorActive(kLevel) && (++time_internal<timeout_internal)) {
                     __delay_ms(1000);
@@ -245,18 +252,22 @@ uint8_t DownToLine(const uint8_t line, uint8_t current_line, uint8_t rele) {
 uint8_t ActuateSingleAt(const uint8_t line, const uint8_t row) {
     SetLedOn(true);
     SetOnSensor(row, true);
+
+    uint16_t timeout = 3000;
+    uint16_t time = 0;
+
     SetLineMotorOn(line, true);
     SetColumnMotorOn(row, true);
 
+    __delay_ms(450);
     while (IsSensorLineActive(line) == true) {
         __delay_ms(1);
     }
 
-    uint16_t timeout = 10000;
-    uint16_t time = 0;
     while (IsSensorLineActive(line) == false && (++time<timeout)) {
         __delay_ms(1);
     }
+
     SetColumnMotorOn(0xFF, false);
     SetLineMotorOn(0xFF, false);
     SetOnSensor(0xFF, false);
@@ -272,21 +283,23 @@ uint8_t ActuateDoubleAt(const uint8_t line, const uint8_t row_one, const uint8_t
     SetOnSensor(row_one, true);
     SetOnSensor(row_two, true);
 
+    uint8_t ready = false;
+    uint8_t ready_one = false;
+    uint8_t ready_two = false;
+    uint16_t timeout = 3000;
+    uint16_t time = 0;
+
     SetLineMotorOn(line, true);
     SetColumnMotorOn(row_one, true);
     SetColumnMotorOn(row_two, true);
 
+    __delay_ms(450);
     while (IsSensorLineActive(line) == true) {
         __delay_ms(1);
     }
 
     SetOnSensor(0xFF, false);
 
-    uint8_t ready = false;
-    uint8_t ready_one = false;
-    uint8_t ready_two = false;
-    uint16_t timeout = 10000;
-    uint16_t time = 0;
     while (!ready && (++time < timeout)) {
         SetOnSensor(row_one, true);
         __delay_us(100);
