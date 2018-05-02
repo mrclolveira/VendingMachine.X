@@ -12,7 +12,7 @@
 #define SensorInLine1 PORTGbits.RG15
 #define SensorInLine2 PORTEbits.RE5
 #define SensorInLine3 PORTEbits.RE6
-#define SensorInLine4 PORTCbits.RC1
+#define SensorInLine4 PORTEbits.RE7
 
 #define SensorOutColumn0(x) LATAbits.LATA7 = x
 #define SensorOutColumn1(x) LATEbits.LATE0 = x
@@ -41,6 +41,7 @@ void SensorsInit(void) {
     TRISGbits.TRISG15 = 1;
     TRISEbits.TRISE5 = 1;
     TRISEbits.TRISE6 = 1;
+    TRISEbits.TRISE7 = 1;
     TRISCbits.TRISC1 = 1;
 
     TRISAbits.TRISA7 = 0;

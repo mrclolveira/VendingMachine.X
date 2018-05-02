@@ -122,8 +122,8 @@ uint8_t SingleActuator(const Payload *value) {
     if (OpenDispenser(true, false) == false) {
         return false;
     }
-    if (value->Byte_4 > 0) {
-        time_to_close_dispenser_ = value->Byte_4;
+    if (value->Byte_1 > 0) {
+        time_to_close_dispenser_ = value->Byte_1;
     } else {
         time_to_close_dispenser_ = kDefaultTimeToClose;
     }
@@ -153,8 +153,8 @@ uint8_t DoubleActuator(const Payload *value) {
     if (OpenDispenser(true, false) == false) {
         return false;
     }
-    if (value->Byte_4 > 0) {
-        time_to_close_dispenser_ = value->Byte_4;
+    if (value->Byte_1 > 0) {
+        time_to_close_dispenser_ = value->Byte_1;
     } else {
         time_to_close_dispenser_ = kDefaultTimeToClose;
     }
@@ -302,7 +302,7 @@ uint8_t ActuateDoubleAt(const uint8_t line, const uint8_t row_one, const uint8_t
 
     while (!ready && (++time < timeout)) {
         SetOnSensor(row_one, true);
-        __delay_us(100);
+        __delay_ms(2);
         if (IsSensorLineActive(line) == true) {
             SetColumnMotorOn(row_one, false);
             ready_one = true;
@@ -310,14 +310,14 @@ uint8_t ActuateDoubleAt(const uint8_t line, const uint8_t row_one, const uint8_t
         SetOnSensor(row_one, false);
 
         SetOnSensor(row_two, true);
-        __delay_us(100);
+        __delay_ms(2);
         if (IsSensorLineActive(line) == true) {
             SetColumnMotorOn(row_two, false);
             ready_two = true;
         }
         SetOnSensor(row_two, false);
 
-        if (ready_one && ready_two) {
+        if (ready_one == true && ready_two == true) {
             ready = true;
         }
     }
