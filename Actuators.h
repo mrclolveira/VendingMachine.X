@@ -19,6 +19,7 @@ enum Direction {
 };
 typedef enum Direction ElevatorDirection;
 void SetElevatorOn(const ElevatorDirection direction, uint8_t rele);
+void SetDropOffOn(uint8_t on);
 
 #endif	// ACTUATORS_H
 
