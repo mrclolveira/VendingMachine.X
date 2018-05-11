@@ -109,10 +109,6 @@ uint8_t HandleSetValues(const Variable *var) {
             SendRun(var);
             known = ReturnElevatorToTop(true);
             break;
-        case kAddressTestDropOff:
-            SendRun(var);
-            DropOff();
-            break;
         case kAddressReset:
             __asm__ volatile ("reset");
             known = true;

@@ -27,8 +27,6 @@
 #define SensorElevatorEndLimit PORTAbits.RA2
 #define SensorElevatorEndLimitDown PORTBbits.RB2
 
-#define SensorDropOff PORTBbits.RB3
-
 #define SensorDispenser PORTGbits.RG2
 
 #define SensorPresence PORTFbits.RF3
@@ -60,9 +58,6 @@ void SensorsInit(void) {
     TRISAbits.TRISA3 = 1;
     TRISAbits.TRISA2 = 1;
     TRISBbits.TRISB2 = 1;
-    ANSBbits.ANSB2 = 0;
-
-    TRISBbits.TRISB2 = 0;
     ANSBbits.ANSB2 = 0;
 
     TRISGbits.TRISG2 = 1;
@@ -199,13 +194,6 @@ uint8_t IsElevatorSensorActive(const ElevatorSensors sensor) {
         }
     }
     return result;
-}
-
-uint8_t IsSensorDropOffActive() {
-    if (SensorDropOff == false) {
-        return true;
-    }
-    return false;
 }
 
 uint8_t IsButtonUpActive() {
