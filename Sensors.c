@@ -34,6 +34,8 @@
 #define ButtonUp PORTFbits.RF7
 #define ButtonDown PORTGbits.RG3
 
+#define SensorDropOff PORTBbits.RB3
+
 void SensorsInit(void) {
     U1CNFG2bits.UTRDIS = 1;
 
@@ -66,6 +68,9 @@ void SensorsInit(void) {
 
     TRISGbits.TRISG3 = 1;
     TRISFbits.TRISF3 = 1;
+
+    TRISBbits.TRISB3 = 1;
+    ANSBbits.ANSB2 = 0;
 
     I2C2CONbits.I2CEN = 0;
     I2C3CONbits.I2CEN = 0;
@@ -196,15 +201,22 @@ uint8_t IsElevatorSensorActive(const ElevatorSensors sensor) {
     return result;
 }
 
-uint8_t IsButtonUpActive() {
+uint8_t IsButtonUpActive(void) {
     if (ButtonUp == false) {
         return true;
     }
     return false;
 }
 
-uint8_t IsButtonDownActive() {
+uint8_t IsButtonDownActive(void) {
     if (ButtonDown == false) {
+        return true;
+    }
+    return false;
+}
+
+uint8_t IsDropOffSensorActive(void) {
+    if (SensorDropOff == false) {
         return true;
     }
     return false;

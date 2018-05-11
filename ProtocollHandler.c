@@ -109,6 +109,10 @@ uint8_t HandleSetValues(const Variable *var) {
             SendRun(var);
             known = ReturnElevatorToTop(true);
             break;
+        case kAddressTestDropOff:
+            SendRun(var);
+            known = DropOff();
+            break;
         case kAddressReset:
             __asm__ volatile ("reset");
             known = true;
@@ -120,7 +124,7 @@ uint8_t HandleSetValues(const Variable *var) {
     return known;
 }
 
-void SendPresenceStatus() {
+void SendPresenceStatus(void) {
     Variable status;
     status.address_ = kAddressPresenceSensor;
     status.value_.Byte_1 = 0;
@@ -131,7 +135,7 @@ void SendPresenceStatus() {
     SendAck(&status);
 }
 
-void SendDispenserClosed() {
+void SendDispenserClosed(void) {
     Variable status;
     status.address_ = kAddressDispenserSensor;
     status.value_.Byte_1 = 0;

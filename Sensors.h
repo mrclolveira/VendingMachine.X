@@ -19,8 +19,9 @@ enum sensor_elevator {
 };
 typedef enum sensor_elevator ElevatorSensors;
 uint8_t IsElevatorSensorActive(const ElevatorSensors sensor);
-uint8_t IsButtonUpActive();
-uint8_t IsButtonDownActive();
+uint8_t IsButtonUpActive(void);
+uint8_t IsButtonDownActive(void);
+uint8_t IsDropOffSensorActive(void);
 
 #endif	// SENSORS_H
 

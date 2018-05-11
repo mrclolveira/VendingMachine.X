@@ -87,7 +87,7 @@ void UnlockDoor(const Payload *value) {
     SetLockOn(false);
 }
 
-uint8_t AlignActuators() {
+uint8_t AlignActuators(void) {
     int line, column;
     for (line = 0; line < kNumberOfLines; line++) {
         for (column = 0; column < kNumberOfColumns; column++) {
@@ -429,5 +429,17 @@ uint8_t CloseDispenser(uint8_t time_to_close) {
 
     close_dispenser_ = false;
     SetLedOn(false);
+    return true;
+}
+
+uint8_t DropOff(void) {
+    uint16_t time = 0;
+    uint16_t timeout = 3000;
+
+    SetDropOffOn(true);
+    while(!IsDropOffSensorActive() && (++time<timeout)) {
+        __delay_ms(1);
+    }
+    SetDropOffOn(false);
     return true;
 }

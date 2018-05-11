@@ -9,7 +9,7 @@
 uint8_t Handle(Protocoll *cmd);
 uint8_t HandleGetValues(Variable *var);
 uint8_t HandleSetValues(const Variable *var);
-void SendPresenceStatus();
-void SendDispenserClosed();
+void SendPresenceStatus(void);
+void SendDispenserClosed(void);
 
 #endif	// PROTOCOLLHANDLER_H
