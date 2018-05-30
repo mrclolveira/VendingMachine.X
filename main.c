@@ -59,7 +59,6 @@
 
 void Setup() {
     CLKDIV = 0;
-    __delay_ms(2000);
 
     ANSA = 0;
     ANSB = 0;
@@ -69,12 +68,17 @@ void Setup() {
     ANSF = 0;
     ANSG = 0;
 
-    RGBInit();
+    RCON = 0;
+
     SensorsInit();
     ActuatorsInit();
+    DropOff();
+
+    RGBInit();
     LEDInit();
+
+    __delay_ms(500);
     UartInit();
-    RCON = 0;
 
     ReturnElevatorToTop(true);
 }

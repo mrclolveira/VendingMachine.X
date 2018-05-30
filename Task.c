@@ -118,6 +118,7 @@ uint8_t SingleActuator(const Payload *value) {
     if (GoElevatorToDown(true) == false) {
         return false;
     }
+    DropOff();
     __delay_ms(2000);
     if (OpenDispenser(true, false) == false) {
         return false;
@@ -149,6 +150,7 @@ uint8_t DoubleActuator(const Payload *value) {
     if (GoElevatorToDown(true) == false) {
         return false;
     }
+    DropOff();
     __delay_ms(2000);
     if (OpenDispenser(true, false) == false) {
         return false;
@@ -440,6 +442,18 @@ uint8_t DropOff(void) {
     while(!IsDropOffSensorActive() && (++time<timeout)) {
         __delay_ms(1);
     }
+    SetDropOffOn(false);
+
+    __delay_ms(1500);
+
+    time = 0;
+    timeout = 1000;
+
+    SetDropOffOn(true);
+    while(IsDropOffSensorActive() && (++time<timeout)) {
+        __delay_ms(1);
+    }
+    __delay_ms(200);
     SetDropOffOn(false);
     return true;
 }
