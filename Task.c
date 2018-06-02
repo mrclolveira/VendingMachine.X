@@ -255,7 +255,7 @@ uint8_t ActuateSingleAt(const uint8_t line, const uint8_t row) {
     SetLedOn(true);
     SetOnSensor(row, true);
 
-    uint16_t timeout = 3000;
+    uint16_t timeout = 650;
     uint16_t time = 0;
 
     SetLineMotorOn(line, true);
@@ -288,7 +288,7 @@ uint8_t ActuateDoubleAt(const uint8_t line, const uint8_t row_one, const uint8_t
     uint8_t ready = false;
     uint8_t ready_one = false;
     uint8_t ready_two = false;
-    uint16_t timeout = 3000;
+    uint16_t timeout = 650;
     uint16_t time = 0;
 
     SetLineMotorOn(line, true);
