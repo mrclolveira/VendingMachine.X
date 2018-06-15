@@ -72,7 +72,6 @@ void Setup() {
 
     SensorsInit();
     ActuatorsInit();
-    DropOff();
 
     RGBInit();
     LEDInit();

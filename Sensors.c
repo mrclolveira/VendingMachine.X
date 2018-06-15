@@ -5,6 +5,9 @@
  * Created on 11 de Março de 2018, 16:10
  */
 
+#include "System.h"
+
+#include <libpic30.h>
 
 #include "Sensors.h"
 
@@ -35,6 +38,8 @@
 #define ButtonDown PORTGbits.RG3
 
 #define SensorDropOff PORTBbits.RB3
+
+#define SensorFilterTime 10
 
 void SensorsInit(void) {
     U1CNFG2bits.UTRDIS = 1;
@@ -118,48 +123,51 @@ void SetOnSensor(const uint8_t column, uint8_t on) {
 }
 
 uint8_t IsSensorLineActive(const uint8_t line) {
-    uint8_t result = false;
     switch (line) {
         case 0:
             if (SensorInLine0 == false) {
-                result = true;
-            } else {
-                result = false;
+                __delay_ms(SensorFilterTime);
+                if (SensorInLine0 == false) {
+                    return true;
+                }
             }
             break;
         case 1:
             if (SensorInLine1 == false) {
-                result = true;
-            } else {
-                result = false;
+                __delay_ms(SensorFilterTime);
+                if (SensorInLine1 == false) {
+                    return true;
+                }
             }
             break;
         case 2:
             if (SensorInLine2 == false) {
-                result = true;
-            } else {
-                result = false;
+                __delay_ms(SensorFilterTime);
+                if (SensorInLine2 == false) {
+                    return true;
+                }
             }
             break;
         case 3:
             if (SensorInLine3 == false) {
-                result = true;
-            } else {
-                result = false;
+                __delay_ms(SensorFilterTime);
+                if (SensorInLine3 == false) {
+                    return true;
+                }
             }
             break;
         case 4:
             if (SensorInLine4 == false) {
-                result = true;
-            } else {
-                result = false;
+                __delay_ms(SensorFilterTime);
+                if (SensorInLine4 == false) {
+                    return true;
+                }
             }
             break;
         default:
-            result = false;
             break;
     }
-    return result;
+    return false;
 }
 
 uint8_t IsDispenserOpen(void) {

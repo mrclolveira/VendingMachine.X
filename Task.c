@@ -118,7 +118,6 @@ uint8_t SingleActuator(const Payload *value) {
     if (GoElevatorToDown(true) == false) {
         return false;
     }
-    DropOff();
     __delay_ms(2000);
     if (OpenDispenser(true, false) == false) {
         return false;
@@ -150,7 +149,6 @@ uint8_t DoubleActuator(const Payload *value) {
     if (GoElevatorToDown(true) == false) {
         return false;
     }
-    DropOff();
     __delay_ms(2000);
     if (OpenDispenser(true, false) == false) {
         return false;
@@ -261,7 +259,7 @@ uint8_t ActuateSingleAt(const uint8_t line, const uint8_t row) {
     SetLineMotorOn(line, true);
     SetColumnMotorOn(row, true);
 
-    __delay_ms(150);
+    __delay_ms(450);
     while (IsSensorLineActive(line) == true) {
         __delay_ms(1);
     }
@@ -295,7 +293,7 @@ uint8_t ActuateDoubleAt(const uint8_t line, const uint8_t row_one, const uint8_t
     SetColumnMotorOn(row_one, true);
     SetColumnMotorOn(row_two, true);
 
-    __delay_ms(150);
+    __delay_ms(450);
     while (IsSensorLineActive(line) == true) {
         __delay_ms(1);
     }
