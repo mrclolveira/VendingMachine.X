@@ -30,14 +30,13 @@
 #define SensorElevatorEndLimit PORTAbits.RA2
 #define SensorElevatorEndLimitDown PORTBbits.RB2
 
-#define SensorDispenser PORTGbits.RG2
+#define SensorDispenserOpen PORTGbits.RG2
+#define SensorDispenserClose PORTBbits.RB3
 
 #define SensorPresence PORTFbits.RF3
 
 #define ButtonUp PORTFbits.RF7
 #define ButtonDown PORTGbits.RG3
-
-#define SensorDropOff PORTBbits.RB3
 
 #define SensorFilterTime 10
 
@@ -68,14 +67,13 @@ void SensorsInit(void) {
     ANSBbits.ANSB2 = 0;
 
     TRISGbits.TRISG2 = 1;
+    TRISBbits.TRISB3 = 1;
+    ANSBbits.ANSB3 = 0;
 
     TRISFbits.TRISF3 = 1;
 
     TRISGbits.TRISG3 = 1;
     TRISFbits.TRISF3 = 1;
-
-    TRISBbits.TRISB3 = 1;
-    ANSBbits.ANSB2 = 0;
 
     I2C2CONbits.I2CEN = 0;
     I2C3CONbits.I2CEN = 0;
@@ -171,7 +169,14 @@ uint8_t IsSensorLineActive(const uint8_t line) {
 }
 
 uint8_t IsDispenserOpen(void) {
-    if (SensorDispenser == false) {
+    if (SensorDispenserOpen == false) {
+        return true;
+    }
+    return false;
+}
+
+uint8_t IsDispenserClosed(void) {
+    if (SensorDispenserClose == false) {
         return true;
     }
     return false;
@@ -218,13 +223,6 @@ uint8_t IsButtonUpActive(void) {
 
 uint8_t IsButtonDownActive(void) {
     if (ButtonDown == false) {
-        return true;
-    }
-    return false;
-}
-
-uint8_t IsDropOffSensorActive(void) {
-    if (SensorDropOff == false) {
         return true;
     }
     return false;

@@ -373,15 +373,10 @@ uint8_t OpenDispenser(uint8_t rele, uint8_t turn_off_elevator) {
         SetElevatorOn(kStoped, rele);
     }
 
-    time = 0;
-    SetDispenserOn(true);
-    while (IsDispenserOpen() == false && (++time<timeout)) {
-        __delay_ms(1);
-    }
+    uint8_t opened = OpenDispenserInternal();
 
-    SetDispenserOn(false);
     close_dispenser_ = true;
-    if (time >= timeout || time_internal >= timeout_internal) {
+    if (time >= timeout || time_internal >= timeout_internal || !opened) {
         return false;
     }
     return true;
@@ -414,9 +409,7 @@ uint8_t CloseDispenser(uint8_t time_to_close) {
         }
     }
 
-    SetDispenserOn(true);
-    __delay_ms(500);
-    SetDispenserOn(false);
+    CloseDispenserInternal();
 
     if (is_elevator_on_top == false) {
         time = 0;
@@ -432,26 +425,32 @@ uint8_t CloseDispenser(uint8_t time_to_close) {
     return true;
 }
 
-uint8_t DropOff(void) {
+uint8_t OpenDispenserInternal(void) {
+    uint16_t timeout = 5000;
     uint16_t time = 0;
-    uint16_t timeout = 3000;
-
-    SetDropOffOn(true);
-    while(!IsDropOffSensorActive() && (++time<timeout)) {
+    SetDispenserOn(true, true);
+    while (IsDispenserOpen() == false && (++time<timeout)) {
         __delay_ms(1);
     }
-    SetDropOffOn(false);
 
-    __delay_ms(1500);
+    SetDispenserOn(false, false);
+    if (time >= timeout) {
+        return false;
+    }
+    return true;
+}
 
-    time = 0;
-    timeout = 1000;
-
-    SetDropOffOn(true);
-    while(IsDropOffSensorActive() && (++time<timeout)) {
+uint8_t CloseDispenserInternal(void) {
+    uint16_t timeout = 5000;
+    uint16_t time = 0;
+    SetDispenserOn(true, false);
+    while (IsDispenserClosed() == false && (++time<timeout)) {
         __delay_ms(1);
     }
-    __delay_ms(200);
-    SetDropOffOn(false);
+
+    SetDispenserOn(false, false);
+    if (time >= timeout) {
+        return false;
+    }
     return true;
 }

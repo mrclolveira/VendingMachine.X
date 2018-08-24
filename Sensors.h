@@ -10,6 +10,7 @@ void SensorsInit(void);
 void SetOnSensor(const uint8_t column, uint8_t on);
 uint8_t IsSensorLineActive(const uint8_t line);
 uint8_t IsDispenserOpen(void);
+uint8_t IsDispenserClosed(void);
 uint8_t IsPresenceSensorActive(void);
 
 enum sensor_elevator {
@@ -21,7 +22,6 @@ typedef enum sensor_elevator ElevatorSensors;
 uint8_t IsElevatorSensorActive(const ElevatorSensors sensor);
 uint8_t IsButtonUpActive(void);
 uint8_t IsButtonDownActive(void);
-uint8_t IsDropOffSensorActive(void);
 
 #endif	// SENSORS_H
 

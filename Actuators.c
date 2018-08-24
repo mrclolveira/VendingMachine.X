@@ -25,14 +25,15 @@
 
 #define ActuatorLock(x) LATDbits.LATD0 = x
 
-#define ActuatorDispenser(x) LATDbits.LATD11 = x
+#define ActuatorDispenserN(x) LATDbits.LATD11 = x
+#define ActuatorDispenserP(x) LATAbits.LATA6 = x
 
 #define ActuatorElevatorUp(x) LATAbits.LATA4 = x
 #define ActuatorElevatorDown(x) LATAbits.LATA5 = x
 #define ActuatorElevatorReleUp(x) LATDbits.LATD10 = x
 #define ActuatorElevatorReleDown(x) LATDbits.LATD9 = x
 
-#define ActuatorDropOff(x) LATAbits.LATA6 = x
+//#define ActuatorDropOff(x) LATAbits.LATA6 = x
 
 void ActuatorsInit(void) {
     TRISDbits.TRISD7 = 0;
@@ -59,19 +60,17 @@ void ActuatorsInit(void) {
     ActuatorLock(false);
 
     TRISDbits.TRISD11 = 0;
-    ActuatorDispenser(false);
+    ActuatorDispenserN(false);
+    TRISAbits.TRISA6 = 0;
+    ANSAbits.ANSA6 = 0;
+    ActuatorDispenserP(false);
 
     TRISAbits.TRISA4 = 0;
-    TRISAbits.TRISA5 = 0;
-//    SetElevatorOn(kStoped, false);
+    TRISAbits.TRISA5 = 0;;
 
     TRISDbits.TRISD10 = 0;
     TRISDbits.TRISD9 = 0;
     SetElevatorOn(kStoped, true);
-
-    TRISAbits.TRISA6 = 0;
-    ANSAbits.ANSA6 = 0;
-    SetDropOffOn(false);
 
     CM3CONbits.CEN = 0;
     IEC0bits.INT0IE = 0;
@@ -79,13 +78,9 @@ void ActuatorsInit(void) {
 
 
 void SetLineMotorOn(const uint8_t line, uint8_t on) {
-    uint8_t on_invert = false;
-    if (on == false) {
-        on_invert = true;
-    }
     switch (line) {
         case 0:
-            ActuatorLine0(on_invert);
+            ActuatorLine0(on == false ? true : false);
             ActuatorLine1(true);
             ActuatorLine2(true);
             ActuatorLine3(true);
@@ -93,7 +88,7 @@ void SetLineMotorOn(const uint8_t line, uint8_t on) {
             break;
         case 1:
             ActuatorLine0(true);
-            ActuatorLine1(on_invert);
+            ActuatorLine1(on == false ? true : false);
             ActuatorLine2(true);
             ActuatorLine3(true);
             ActuatorLine4(true);
@@ -101,7 +96,7 @@ void SetLineMotorOn(const uint8_t line, uint8_t on) {
         case 2:
             ActuatorLine0(true);
             ActuatorLine1(true);
-            ActuatorLine2(on_invert);
+            ActuatorLine2(on == false ? true : false);
             ActuatorLine3(true);
             ActuatorLine4(true);
             break;
@@ -109,7 +104,7 @@ void SetLineMotorOn(const uint8_t line, uint8_t on) {
             ActuatorLine0(true);
             ActuatorLine1(true);
             ActuatorLine2(true);
-            ActuatorLine3(on_invert);
+            ActuatorLine3(on == false ? true : false);
             ActuatorLine4(true);
             break;
         case 4:
@@ -117,7 +112,7 @@ void SetLineMotorOn(const uint8_t line, uint8_t on) {
             ActuatorLine1(true);
             ActuatorLine2(true);
             ActuatorLine3(true);
-            ActuatorLine4(on_invert);
+            ActuatorLine4(on == false ? true : false);
             break;
         default:
             ActuatorLine0(true);
@@ -172,8 +167,14 @@ void SetLockOn(uint8_t on) {
     ActuatorLock(on);
 }
 
-void SetDispenserOn(uint8_t on) {
-    ActuatorDispenser(on);
+void SetDispenserOn(uint8_t on, uint8_t open) {
+    if (on == true) {
+        ActuatorDispenserP(open == true ? true : false);
+        ActuatorDispenserN(open == true ? false : true);
+    } else {
+        ActuatorDispenserP(false);
+        ActuatorDispenserN(false);
+    }
 }
 
 void SetElevatorOn(const ElevatorDirection direction, uint8_t rele) {
@@ -201,13 +202,5 @@ void SetElevatorOn(const ElevatorDirection direction, uint8_t rele) {
             ActuatorElevatorUp(false);
             ActuatorElevatorDown(false);
         }
-    }
-}
-
-void SetDropOffOn(uint8_t on) {
-    if (on == false) {
-        ActuatorDropOff(true);
-    } else {
-        ActuatorDropOff(false);
     }
 }

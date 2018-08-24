@@ -68,7 +68,7 @@ typedef union {
 #define kAddressTestOpenDispenser 0x35
 #define kAddressTestCloseDispenser 0x36
 #define kAddressTestAlignActuators 0x37
-#define kAddressTestDropOff 0x38
+#define kAddressTestDispenserCloseOpen 0x38
 
 #define kAddressReset 0x40
 

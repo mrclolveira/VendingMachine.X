@@ -27,7 +27,8 @@ uint8_t ActuateSingleAt(const uint8_t line, const uint8_t row);
 uint8_t ActuateDoubleAt(const uint8_t line, const uint8_t row_one, const uint8_t row_two);
 uint8_t OpenDispenser(uint8_t rele, uint8_t turn_off_elevator);
 uint8_t CloseDispenser(uint8_t time_to_close);
-uint8_t DropOff(void);
+uint8_t OpenDispenserInternal(void);
+uint8_t CloseDispenserInternal(void);
 
 #endif	// TASK_H
 

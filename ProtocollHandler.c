@@ -7,6 +7,7 @@
 
 #include <xc.h>
 #include <libpic30.h>
+#include "Actuators.h"
 
 #include "ProtocollHandler.h"
 #include "Sensors.h"
@@ -109,9 +110,10 @@ uint8_t HandleSetValues(const Variable *var) {
             SendRun(var);
             known = ReturnElevatorToTop(true);
             break;
-        case kAddressTestDropOff:
+        case kAddressTestDispenserCloseOpen:
             SendRun(var);
-            known = DropOff();
+            known = CloseDispenserInternal();
+            known = OpenDispenserInternal();
             break;
         case kAddressReset:
             __asm__ volatile ("reset");

@@ -1,8 +1,9 @@
 build/default/production/ProtocollHandler.o:  \
 ProtocollHandler.c  \
- ProtocollHandler.h  \
+ Actuators.h  \
+ProtocollHandler.h  \
 definitions.h  \
 Sensors.h  \
 RGB.h  \
 Task.h  \
-Uart.h 
+ Uart.h 
