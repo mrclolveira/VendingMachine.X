@@ -9,7 +9,7 @@ void ActuatorsInit(void);
 
 void SetLineMotorOn(const uint8_t line, uint8_t on);
 void SetColumnMotorOn(const uint8_t column, uint8_t on);
-void SetLockOn(uint8_t on);
+void SetRelayOn(uint8_t on);
 void SetDispenserOn(uint8_t on, uint8_t open);
 
 enum Direction {

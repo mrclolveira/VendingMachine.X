@@ -23,7 +23,7 @@
 #define ActuatorColumn6(x) LATDbits.LATD5 = x
 #define ActuatorColumn7(x) LATDbits.LATD6 = x
 
-#define ActuatorLock(x) LATDbits.LATD0 = x
+#define RelayOutput(x) LATDbits.LATD0 = x
 
 #define ActuatorDispenserN(x) LATDbits.LATD11 = x
 #define ActuatorDispenserP(x) LATAbits.LATA6 = x
@@ -57,7 +57,7 @@ void ActuatorsInit(void) {
     SetColumnMotorOn(0xFF, false);
 
     TRISDbits.TRISD0 = 0;
-    ActuatorLock(false);
+    RelayOutput(false);
 
     TRISDbits.TRISD11 = 0;
     ActuatorDispenserN(false);
@@ -163,14 +163,19 @@ void SetColumnMotorOn(const uint8_t column, uint8_t on) {
     }
 }
 
-void SetLockOn(uint8_t on) {
-    ActuatorLock(on);
+void SetRelayOn(uint8_t on) {
+    RelayOutput(on);
 }
 
 void SetDispenserOn(uint8_t on, uint8_t open) {
     if (on == true) {
-        ActuatorDispenserP(open == true ? true : false);
-        ActuatorDispenserN(open == true ? false : true);
+        if (open == true) {
+            ActuatorDispenserP(false);
+            ActuatorDispenserN(true);
+        } else {
+            ActuatorDispenserP(true);
+            ActuatorDispenserN(false);
+        }
     } else {
         ActuatorDispenserP(false);
         ActuatorDispenserN(false);

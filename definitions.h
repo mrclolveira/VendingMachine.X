@@ -53,7 +53,7 @@ typedef union {
 #define kAddressDispenserSensor 0x11
 
 #define kAddressRGB 0x20
-#define kAddressDoorLock 0x21
+#define kAddressRelayOutput 0x21
 #define kAddressAlignActuators 0x22
 #define kAddressSingleActuator 0x23
 #define kAddressDoubleActuator 0x24

@@ -79,6 +79,13 @@ void Setup() {
     __delay_ms(500);
     UartInit();
 
+    Payload time;
+    time.Byte_1 = 0xDC;
+    time.Byte_2 = 0x5;
+    time.Byte_3 = 0x0;
+    time.Byte_4 = 0x0;
+    TurnPcOn(&time);
+
     ReturnElevatorToTop(true);
 }
 

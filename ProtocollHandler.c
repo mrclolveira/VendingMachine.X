@@ -7,7 +7,6 @@
 
 #include <xc.h>
 #include <libpic30.h>
-#include "Actuators.h"
 
 #include "ProtocollHandler.h"
 #include "Sensors.h"
@@ -54,9 +53,9 @@ uint8_t HandleSetValues(const Variable *var) {
             SetRGB(var->value_.Byte_1, var->value_.Byte_2, var->value_.Byte_3);
             known = true;
             break;
-        case kAddressDoorLock:
+        case kAddressRelayOutput:
             SendRun(var);
-            UnlockDoor(&var->value_);
+            TurnPcOn(&var->value_);
             known = true;
             break;
         case kAddressAlignActuators:
@@ -112,8 +111,10 @@ uint8_t HandleSetValues(const Variable *var) {
             break;
         case kAddressTestDispenserCloseOpen:
             SendRun(var);
-            known = CloseDispenserInternal();
+            UartWriteASCII("Open");
             known = OpenDispenserInternal();
+            UartWriteASCII("Close");
+            known = CloseDispenserInternal();
             break;
         case kAddressReset:
             __asm__ volatile ("reset");

@@ -77,14 +77,14 @@ uint8_t SetSendPresenceStatus(const Payload *value) {
     return false;
 }
 
-void UnlockDoor(const Payload *value) {
-    SetLockOn(true);
+void TurnPcOn(const Payload *value) {
+    SetRelayOn(true);
 
     uint8_t buffer[4] = { value->Byte_4, value->Byte_3, value->Byte_2,
                           value->Byte_1 };
     uint32_t time = *(uint32_t *)&buffer;
     __delay_ms(time);
-    SetLockOn(false);
+    SetRelayOn(false);
 }
 
 uint8_t AlignActuators(void) {

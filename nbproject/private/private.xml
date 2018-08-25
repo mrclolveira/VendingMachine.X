@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/git/VendingMachine.X/Task.h</file>
+            <file>file:/home/git/VendingMachine.X/ProtocollHandler.h</file>
+            <file>file:/home/git/VendingMachine.X/Uart.c</file>
+            <file>file:/home/git/VendingMachine.X/Sensors.h</file>
+            <file>file:/home/git/VendingMachine.X/ProtocollHandler.c</file>
+            <file>file:/home/git/VendingMachine.X/Task.c</file>
+            <file>file:/home/git/VendingMachine.X/Actuators.h</file>
+            <file>file:/home/git/VendingMachine.X/Actuators.c</file>
+            <file>file:/home/git/VendingMachine.X/definitions.h</file>
+            <file>file:/home/git/VendingMachine.X/main.c</file>
+            <file>file:/home/git/VendingMachine.X/Sensors.c</file>
+        </group>
     </open-files>
 </project-private>
