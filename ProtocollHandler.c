@@ -111,9 +111,7 @@ uint8_t HandleSetValues(const Variable *var) {
             break;
         case kAddressTestDispenserCloseOpen:
             SendRun(var);
-            UartWriteASCII("Open");
             known = OpenDispenserInternal();
-            UartWriteASCII("Close");
             known = CloseDispenserInternal();
             break;
         case kAddressReset:

@@ -80,10 +80,10 @@ void Setup() {
     UartInit();
 
     Payload time;
-    time.Byte_1 = 0xDC;
-    time.Byte_2 = 0x5;
-    time.Byte_3 = 0x0;
-    time.Byte_4 = 0x0;
+    time.Byte_1 = 0x00;
+    time.Byte_2 = 0x00;
+    time.Byte_3 = 0x05;
+    time.Byte_4 = 0xDC;
     TurnPcOn(&time);
 
     ReturnElevatorToTop(true);
