@@ -114,12 +114,12 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0xe8e          0x15d5  (5589)
 .const                      0x108e                 0xe            0x15  (21)
-.text                       0x109c              0x1346          0x1ce9  (7401)
-.dinit                      0x23e2                0x46            0x69  (105)
-.text                       0x2428                0x26            0x39  (57)
-.init.delay32               0x244e                0x1c            0x2a  (42)
+.text                       0x109c              0x134e          0x1cf5  (7413)
+.dinit                      0x23ea                0x46            0x69  (105)
+.text                       0x2430                0x26            0x39  (57)
+.init.delay32               0x2456                0x1c            0x2a  (42)
 
-                 Total "program" memory used (bytes):         0x339f  (13215) 5%
+                 Total "program" memory used (bytes):         0x33ab  (13227) 5%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x18000]
@@ -240,12 +240,12 @@ External Symbols in Program Memory (by address):
                   0x002240                  _SendPresenceStatus
                   0x00225e                  _SendDispenserClosed
                   0x00227c                  _RGBInit
-                  0x002340                  _SetRGB
-                  0x00239a                  _Setup
-                  0x0023da                  _main
-                  0x002428                  _LEDInit
-                  0x002432                  _SetLedOn
-                  0x00244e                  ___delay32
+                  0x002348                  _SetRGB
+                  0x0023a2                  _Setup
+                  0x0023e2                  _main
+                  0x002430                  _LEDInit
+                  0x00243a                  _SetLedOn
+                  0x002456                  ___delay32
 
 External Symbols in Program Memory (by name):
 
@@ -270,7 +270,7 @@ External Symbols in Program Memory (by name):
                   0x001a80                  _IsElevatorSensorActive
                   0x001a6c                  _IsPresenceSensorActive
                   0x001964                  _IsSensorLineActive
-                  0x002428                  _LEDInit
+                  0x002430                  _LEDInit
                   0x0010e6                  _MainTask
                   0x0015f6                  _OpenDispenser
                   0x0017aa                  _OpenDispenserInternal
@@ -286,13 +286,13 @@ External Symbols in Program Memory (by name):
                   0x001c3a                  _SetColumnMotorOn
                   0x001d4a                  _SetDispenserOn
                   0x001d70                  _SetElevatorOn
-                  0x002432                  _SetLedOn
+                  0x00243a                  _SetLedOn
                   0x001b56                  _SetLineMotorOn
                   0x001870                  _SetOnSensor
-                  0x002340                  _SetRGB
+                  0x002348                  _SetRGB
                   0x001d30                  _SetRelayOn
                   0x00112c                  _SetSendPresenceStatus
-                  0x00239a                  _Setup
+                  0x0023a2                  _Setup
                   0x0011d0                  _SingleActuator
                   0x001150                  _TurnPcOn
                   0x001e74                  _UartInit
@@ -308,7 +308,7 @@ External Symbols in Program Memory (by name):
                   0x000bc4                  __Vacopy
                   0x0008c2                  ___Printf_cdnopuxX
                   0x000bc8                  ___Putfld_cdnopuxX
-                  0x00244e                  ___delay32
+                  0x002456                  ___delay32
                   0x00066a                  ___divdi3
                   0x00104a                  ___divsi3
                   0x000456                  ___fixunssfsi
@@ -334,7 +334,7 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x0008a4                  __sprintf_cdnopuxX
-                  0x0023da                  _main
+                  0x0023e2                  _main
                   0x000a26                  _memcpy
                   0x000a34                  _strchr
                   0x000896                  sprintf_cdnopuxX.DAeo:_prout
@@ -531,16 +531,16 @@ __CONFIG1
  .debug_abbrev    0x00072b         0xee build/default/production/ProtocollHandler.o
  .debug_abbrev    0x000819         0x9b build/default/production/main.o
 
-.debug_line       0x000000        0xa45
+.debug_line       0x000000        0xa46
  *(.debug_line)
  .debug_line      0x000000        0x16c build/default/production/Actuators.o
  .debug_line      0x00016c         0xc8 build/default/production/LED.o
- .debug_line      0x000234         0xee build/default/production/RGB.o
- .debug_line      0x000322        0x16c build/default/production/Sensors.o
- .debug_line      0x00048e        0x260 build/default/production/Task.o
- .debug_line      0x0006ee        0x174 build/default/production/Uart.o
- .debug_line      0x000862         0xf6 build/default/production/ProtocollHandler.o
- .debug_line      0x000958         0xed build/default/production/main.o
+ .debug_line      0x000234         0xef build/default/production/RGB.o
+ .debug_line      0x000323        0x16c build/default/production/Sensors.o
+ .debug_line      0x00048f        0x260 build/default/production/Task.o
+ .debug_line      0x0006ef        0x174 build/default/production/Uart.o
+ .debug_line      0x000863         0xf6 build/default/production/ProtocollHandler.o
+ .debug_line      0x000959         0xed build/default/production/main.o
 
 .debug_frame      0x000000        0x6e8
  *(.debug_frame)
@@ -1934,7 +1934,7 @@ __c30_signature
 .const              0x908e          0xe load address 0x00108e  
  .const             0x908e          0xe build/default/production/Uart.o
 
-.text             0x00109c       0x1346
+.text             0x00109c       0x134e
  .text            0x00109c        0x78e build/default/production/Task.o
                   0x00109c                  _InitLedThread
                   0x0010e6                  _MainTask
@@ -1986,21 +1986,21 @@ __c30_signature
                   0x0020e0                  _HandleSetValues
                   0x002240                  _SendPresenceStatus
                   0x00225e                  _SendDispenserClosed
- .text            0x00227c        0x11e build/default/production/RGB.o
+ .text            0x00227c        0x126 build/default/production/RGB.o
                   0x00227c                  _RGBInit
-                  0x002340                  _SetRGB
- .text            0x00239a         0x48 build/default/production/main.o
-                  0x00239a                  _Setup
-                  0x0023da                  _main
+                  0x002348                  _SetRGB
+ .text            0x0023a2         0x48 build/default/production/main.o
+                  0x0023a2                  _Setup
+                  0x0023e2                  _main
 
-.dinit            0x0023e2         0x46
- .dinit           0x0023e2         0x46 data_init
+.dinit            0x0023ea         0x46
+ .dinit           0x0023ea         0x46 data_init
 
-.text             0x002428         0x26
- .text            0x002428         0x26 build/default/production/LED.o
-                  0x002428                  _LEDInit
-                  0x002432                  _SetLedOn
+.text             0x002430         0x26
+ .text            0x002430         0x26 build/default/production/LED.o
+                  0x002430                  _LEDInit
+                  0x00243a                  _SetLedOn
 
-.init.delay32     0x00244e         0x1c
- .init.delay32    0x00244e         0x1c /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(delay32da.Leo)
-                  0x00244e                  ___delay32
+.init.delay32     0x002456         0x1c
+ .init.delay32    0x002456         0x1c /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(delay32da.Leo)
+                  0x002456                  ___delay32

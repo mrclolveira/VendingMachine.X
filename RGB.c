@@ -46,6 +46,8 @@ void RGBInit(void) {
     OC3CON2bits.OCINV = 0;
     OC3CON1bits.OCTSEL = 0b111;
     OC3CON1bits.OCM = 0b110;
+
+    SetRGB(0, 0, 0);
 }
 
 void SetRGB(const uint8_t red, const uint8_t green, const uint8_t blue) {
